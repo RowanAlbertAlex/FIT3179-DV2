@@ -1,0 +1,7 @@
+group,group_order,real_income_2021_weekly,real_income_2024_weekly,change_dollars,change_percent,source_url,note
+All households,0,1455,1464,9,0.006185567010309256,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW PolicyMod real equivalised disposable household income; 2024 similar to 2021.
+Quintile 1 (lowest),1,532,549,17,0.031,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reported 2021 to 2024 change.
+Quintile 2,2,928,936,8,0.009,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reported 2021 to 2024 change.
+Quintile 3,3,1279,1262,-17,-0.013,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reported 2021 to 2024 change.
+Quintile 4,4,1718,1666,-52,-0.031,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reported 2021 to 2024 change.
+Quintile 5 (highest),5,2534,2488,-46,-0.018,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reported 2021 to 2024 change.

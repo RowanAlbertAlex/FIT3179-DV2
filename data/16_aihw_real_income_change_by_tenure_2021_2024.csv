@@ -1,0 +1,4 @@
+tenure,tenure_order,real_income_change_2021_2024_percent,real_income_2021_weekly,real_income_2024_weekly,source_url,note
+Owner with a mortgage,1,-0.077,1847,1705,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW PolicyMod; exact weekly values reported for owners with a mortgage.
+Owner without a mortgage,2,0.097,,,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reports percentage growth; weekly endpoints not stated in article text.
+Renter,3,0.055,,,https://www.aihw.gov.au/reports/australias-welfare/income-and-income-inequality,AIHW reports percentage growth; weekly endpoints not stated in article text.

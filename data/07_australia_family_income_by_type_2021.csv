@@ -1,0 +1,69 @@
+geography,income_band_order,income_band_key,income_band,family_type,family_type_label,families,families_stated_total,share_within_family_type
+Australia,1,negative_nil,Negative/Nil income,couple_no_children,"Couple family, no children",57675,2458654,0.023457957077327677
+Australia,1,negative_nil,Negative/Nil income,couple_with_children,"Couple family, with children",12717,2688261,0.004730567456061744
+Australia,1,negative_nil,Negative/Nil income,one_parent,One-parent family,21203,979366,0.021649720329274244
+Australia,1,negative_nil,Negative/Nil income,other_family,Other family,2204,102552,0.021491536001248146
+Australia,2,1_149,$1-$149,couple_no_children,"Couple family, no children",21061,2458654,0.00856606907682008
+Australia,2,1_149,$1-$149,couple_with_children,"Couple family, with children",3303,2688261,0.0012286753406756264
+Australia,2,1_149,$1-$149,one_parent,One-parent family,6371,979366,0.006505228892977702
+Australia,2,1_149,$1-$149,other_family,Other family,901,102552,0.008785786722833294
+Australia,3,150_299,$150-$299,couple_no_children,"Couple family, no children",14787,2458654,0.006014266342478446
+Australia,3,150_299,$150-$299,couple_with_children,"Couple family, with children",5501,2688261,0.0020463042836986437
+Australia,3,150_299,$150-$299,one_parent,One-parent family,14741,979366,0.015051574181664465
+Australia,3,150_299,$150-$299,other_family,Other family,1212,102552,0.011818394570559327
+Australia,4,300_399,$300-$399,couple_no_children,"Couple family, no children",12215,2458654,0.004968165508444864
+Australia,4,300_399,$300-$399,couple_with_children,"Couple family, with children",4801,2688261,0.0017859129005702943
+Australia,4,300_399,$300-$399,one_parent,One-parent family,24198,979366,0.024707821182275064
+Australia,4,300_399,$300-$399,other_family,Other family,998,102552,0.00973164833450347
+Australia,5,400_499,$400-$499,couple_no_children,"Couple family, no children",63996,2458654,0.026028875962213472
+Australia,5,400_499,$400-$499,couple_with_children,"Couple family, with children",13176,2688261,0.004901309805855905
+Australia,5,400_499,$400-$499,one_parent,One-parent family,43807,979366,0.044729957952389605
+Australia,5,400_499,$400-$499,other_family,Other family,2758,102552,0.02689367345346751
+Australia,6,500_649,$500-$649,couple_no_children,"Couple family, no children",46141,2458654,0.018766772388469462
+Australia,6,500_649,$500-$649,couple_with_children,"Couple family, with children",18847,2688261,0.007010851996885719
+Australia,6,500_649,$500-$649,one_parent,One-parent family,73129,979366,0.07466973531856323
+Australia,6,500_649,$500-$649,other_family,Other family,3169,102552,0.030901396364771044
+Australia,7,650_799,$650-$799,couple_no_children,"Couple family, no children",264656,2458654,0.10764263698755498
+Australia,7,650_799,$650-$799,couple_with_children,"Couple family, with children",40649,2688261,0.015120927618263256
+Australia,7,650_799,$650-$799,one_parent,One-parent family,85824,979366,0.08763220287410427
+Australia,7,650_799,$650-$799,other_family,Other family,5941,102552,0.0579315859271394
+Australia,8,800_999,$800-$999,couple_no_children,"Couple family, no children",177942,2458654,0.07237374596018797
+Australia,8,800_999,$800-$999,couple_with_children,"Couple family, with children",60315,2688261,0.022436437533409143
+Australia,8,800_999,$800-$999,one_parent,One-parent family,110547,979366,0.11287608514079517
+Australia,8,800_999,$800-$999,other_family,Other family,11277,102552,0.10996372571963492
+Australia,9,1000_1249,"$1,000-$1,249",couple_no_children,"Couple family, no children",195219,2458654,0.07940076155489956
+Australia,9,1000_1249,"$1,000-$1,249",couple_with_children,"Couple family, with children",104970,2688261,0.03904754783854693
+Australia,9,1000_1249,"$1,000-$1,249",one_parent,One-parent family,117527,979366,0.12000314489169524
+Australia,9,1000_1249,"$1,000-$1,249",other_family,Other family,11375,102552,0.11091933848194087
+Australia,10,1250_1499,"$1,250-$1,499",couple_no_children,"Couple family, no children",224866,2458654,0.09145898528219099
+Australia,10,1250_1499,"$1,250-$1,499",couple_with_children,"Couple family, with children",154634,2688261,0.05752194448381314
+Australia,10,1250_1499,"$1,250-$1,499",one_parent,One-parent family,103647,979366,0.10583071088847275
+Australia,10,1250_1499,"$1,250-$1,499",other_family,Other family,12519,102552,0.12207465480926749
+Australia,11,1500_1749,"$1,500-$1,749",couple_no_children,"Couple family, no children",131325,2458654,0.053413371706632976
+Australia,11,1500_1749,"$1,500-$1,749",couple_with_children,"Couple family, with children",152151,2688261,0.05659829904908787
+Australia,11,1500_1749,"$1,500-$1,749",one_parent,One-parent family,77952,979366,0.07959434981406338
+Australia,11,1500_1749,"$1,500-$1,749",other_family,Other family,7950,102552,0.07752164755441142
+Australia,12,1750_1999,"$1,750-$1,999",couple_no_children,"Couple family, no children",151648,2458654,0.06167927654724902
+Australia,12,1750_1999,"$1,750-$1,999",couple_with_children,"Couple family, with children",166293,2688261,0.06185894896366089
+Australia,12,1750_1999,"$1,750-$1,999",one_parent,One-parent family,64787,979366,0.06615197995437865
+Australia,12,1750_1999,"$1,750-$1,999",other_family,Other family,7925,102552,0.07727786878851704
+Australia,13,2000_2499,"$2,000-$2,499",couple_no_children,"Couple family, no children",321117,2458654,0.13060682796359308
+Australia,13,2000_2499,"$2,000-$2,499",couple_with_children,"Couple family, with children",400620,2688261,0.14902570844125626
+Australia,13,2000_2499,"$2,000-$2,499",one_parent,One-parent family,107356,979366,0.1096178548162791
+Australia,13,2000_2499,"$2,000-$2,499",other_family,Other family,14061,102552,0.13711092908963257
+Australia,14,2500_2999,"$2,500-$2,999",couple_no_children,"Couple family, no children",227889,2458654,0.09268851981612704
+Australia,14,2500_2999,"$2,500-$2,999",couple_with_children,"Couple family, with children",343965,2688261,0.1279507458539182
+Australia,14,2500_2999,"$2,500-$2,999",one_parent,One-parent family,46693,979366,0.047676762313578376
+Australia,14,2500_2999,"$2,500-$2,999",other_family,Other family,8412,102552,0.08202667914813948
+Australia,15,3000_3499,"$3,000-$3,499",couple_no_children,"Couple family, no children",170580,2458654,0.06937942467707942
+Australia,15,3000_3499,"$3,000-$3,499",couple_with_children,"Couple family, with children",307844,2688261,0.11451417849680519
+Australia,15,3000_3499,"$3,000-$3,499",one_parent,One-parent family,31268,979366,0.031926777119074996
+Australia,15,3000_3499,"$3,000-$3,499",other_family,Other family,4803,102552,0.046834776503627426
+Australia,16,3500_3999,"$3,500-$3,999",couple_no_children,"Couple family, no children",106141,2458654,0.043170368827822055
+Australia,16,3500_3999,"$3,500-$3,999",couple_with_children,"Couple family, with children",213784,2688261,0.07952501635815867
+Australia,16,3500_3999,"$3,500-$3,999",one_parent,One-parent family,13073,979366,0.013348431536320435
+Australia,16,3500_3999,"$3,500-$3,999",other_family,Other family,2557,102552,0.02493369217567673
+Australia,17,4000_more,"$4,000 or more",couple_no_children,"Couple family, no children",271396,2458654,0.11038397432090892
+Australia,17,4000_more,"$4,000 or more",couple_with_children,"Couple family, with children",684691,2688261,0.25469662357933254
+Australia,17,4000_more,"$4,000 or more",one_parent,One-parent family,37243,979366,0.03802766279409332
+Australia,17,4000_more,"$4,000 or more",other_family,Other family,4490,102552,0.043782666354629844
