@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "description": "100-unit summary of Australian weekly household income in 2021.",
+
+  "data": {
+    "sequence": {
+      "start": 0,
+      "stop": 100,
+      "step": 1,
+      "as": "unit"
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "datum.unit % 10",
+      "as": "column"
+    },
+    {
+      "calculate": "floor(datum.unit / 10)",
+      "as": "row"
+    },
+    {
+      "calculate": "datum.unit < 29 ? 'Below $1,000' : datum.unit < 56 ? '$1,000–$1,999' : datum.unit < 76 ? '$2,000–$2,999' : '$3,000+'",
+      "as": "income_group"
+    }
+  ],
+
+  "title": {
+    "text": "If Australia were 100 households...",
+    "subtitle": "Each square represents about 1% of households with stated income",
+    "anchor": "start",
+    "font": "Georgia",
+    "fontSize": 24,
+    "fontWeight": "normal",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 14,
+    "subtitleColor": "#465564",
+    "offset": 18
+  },
+
+  "mark": {
+    "type": "square",
+    "size": 1600,
+    "stroke": "#fffdf8",
+    "strokeWidth": 2
+  },
+
+  "encoding": {
+    "x": {
+      "field": "column",
+      "type": "ordinal",
+      "axis": null
+    },
+
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "sort": "ascending",
+      "axis": null
+    },
+
+    "color": {
+      "field": "income_group",
+      "type": "nominal",
+
+      "scale": {
+        "domain": [
+          "Below $1,000",
+          "$1,000–$1,999",
+          "$2,000–$2,999",
+          "$3,000+"
+        ],
+
+        "range": [
+          "#b8d1cc",
+          "#7fada5",
+          "#4c897f",
+          "#195e56"
+        ]
+      },
+
+      "legend": {
+        "title": null,
+        "orient": "bottom",
+        "direction": "horizontal",
+        "columns": 2,
+        "labelFont": "Arial",
+        "labelFontSize": 13,
+        "labelColor": "#465564",
+        "symbolType": "square",
+        "symbolSize": 150,
+        "columnPadding": 28,
+        "rowPadding": 9,
+        "offset": 18
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "income_group",
+        "type": "nominal",
+        "title": "Weekly household income"
+      }
+    ]
+  },
+
+  "width": {
+    "step": 46
+  },
+
+  "height": {
+    "step": 46
+  },
+
+  "config": {
+    "background": null,
+
+    "view": {
+      "stroke": null
+    }
+  }
+}

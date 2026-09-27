@@ -1,0 +1,184 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "description": "Full national weekly household income distribution for Australia in 2021.",
+
+  "data": {
+    "values": [
+      { "order": 1, "band": "Negative / nil", "share": 2.0 },
+      { "order": 2, "band": "$1–149", "share": 0.8 },
+      { "order": 3, "band": "$150–299", "share": 1.4 },
+      { "order": 4, "band": "$300–399", "share": 2.4 },
+      { "order": 5, "band": "$400–499", "share": 6.0 },
+      { "order": 6, "band": "$500–649", "share": 4.4 },
+      { "order": 7, "band": "$650–799", "share": 6.2 },
+      { "order": 8, "band": "$800–999", "share": 5.9 },
+      { "order": 9, "band": "$1,000–1,249", "share": 7.4 },
+      { "order": 10, "band": "$1,250–1,499", "share": 7.6 },
+      { "order": 11, "band": "$1,500–1,749", "share": 5.9 },
+      { "order": 12, "band": "$1,750–1,999", "share": 5.9 },
+      { "order": 13, "band": "$2,000–2,499", "share": 12.1 },
+      { "order": 14, "band": "$2,500–2,999", "share": 7.7 },
+      { "order": 15, "band": "$3,000–3,499", "share": 6.8 },
+      { "order": 16, "band": "$3,500–3,999", "share": 4.1 },
+      { "order": 17, "band": "$4,000+", "share": 13.4 }
+    ]
+  },
+
+  "transform": [
+    {
+      "calculate": "format(datum.share, '.1f') + '%'",
+      "as": "share_label"
+    }
+  ],
+
+  "title": {
+    "text": "The full national income distribution",
+    "subtitle": "All 17 Census bands; $4,000+ includes every income above that threshold",
+    "anchor": "start",
+    "font": "Georgia",
+    "fontSize": 24,
+    "fontWeight": "normal",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 14,
+    "subtitleColor": "#465564",
+    "offset": 18
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 1
+      },
+
+      "encoding": {
+        "y": {
+          "field": "band",
+          "type": "ordinal",
+
+          "sort": {
+            "field": "order",
+            "op": "min",
+            "order": "ascending"
+          },
+
+          "axis": {
+            "title": null,
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#465564",
+            "labelPadding": 6,
+            "ticks": false,
+            "domain": false
+          }
+        },
+
+        "x": {
+          "field": "share",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [0, 15]
+          },
+
+          "axis": {
+            "title": "Share of households",
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "normal",
+            "titleColor": "#465564",
+            "titlePadding": 10,
+
+            "values": [0, 5, 10, 15],
+
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#465564",
+            "labelExpr": "datum.value + '%'",
+
+            "grid": true,
+            "gridColor": "#d8d0c3",
+            "gridOpacity": 0.35,
+
+            "ticks": false,
+            "domain": false
+          }
+        },
+
+        "color": {
+          "condition": {
+            "test": "datum.band === '$4,000+'",
+            "value": "#c99b3d"
+          },
+          "value": "#4c897f"
+        },
+
+        "tooltip": [
+          {
+            "field": "band",
+            "type": "ordinal",
+            "title": "Weekly household income"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of households",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.band === '$4,000+'"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#17243a"
+      },
+
+      "encoding": {
+        "y": {
+          "field": "band",
+          "type": "ordinal",
+
+          "sort": {
+            "field": "order",
+            "op": "min",
+            "order": "ascending"
+          }
+        },
+
+        "x": {
+          "field": "share",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "share_label"
+        }
+      }
+    }
+  ],
+
+  "width": 300,
+  "height": 535,
+
+  "config": {
+    "background": null,
+
+    "view": {
+      "stroke": null
+    }
+  }
+}

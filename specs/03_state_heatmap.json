@@ -1,0 +1,219 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "description": "Heatmap showing how each state or territory differs from the national household income distribution in 2021.",
+
+  "data": {
+    "values": [
+      { "state": "ACT", "band": "Negative / nil", "order": 1, "share": 1.3, "national_share": 2.0 },
+      { "state": "ACT", "band": "<$500", "order": 2, "share": 4.0, "national_share": 10.6 },
+      { "state": "ACT", "band": "$500–999", "order": 3, "share": 8.0, "national_share": 16.5 },
+      { "state": "ACT", "band": "$1k–1.5k", "order": 4, "share": 13.0, "national_share": 15.0 },
+      { "state": "ACT", "band": "$1.5k–2k", "order": 5, "share": 16.0, "national_share": 11.8 },
+      { "state": "ACT", "band": "$2k–3k", "order": 6, "share": 22.0, "national_share": 19.8 },
+      { "state": "ACT", "band": "$3k–4k", "order": 7, "share": 16.0, "national_share": 10.9 },
+      { "state": "ACT", "band": "$4k+", "order": 8, "share": 19.7, "national_share": 13.4 },
+
+      { "state": "NT", "band": "Negative / nil", "order": 1, "share": 2.4, "national_share": 2.0 },
+      { "state": "NT", "band": "<$500", "order": 2, "share": 7.5, "national_share": 10.6 },
+      { "state": "NT", "band": "$500–999", "order": 3, "share": 11.5, "national_share": 16.5 },
+      { "state": "NT", "band": "$1k–1.5k", "order": 4, "share": 14.0, "national_share": 15.0 },
+      { "state": "NT", "band": "$1.5k–2k", "order": 5, "share": 13.0, "national_share": 11.8 },
+      { "state": "NT", "band": "$2k–3k", "order": 6, "share": 18.0, "national_share": 19.8 },
+      { "state": "NT", "band": "$3k–4k", "order": 7, "share": 13.5, "national_share": 10.9 },
+      { "state": "NT", "band": "$4k+", "order": 8, "share": 20.1, "national_share": 13.4 },
+
+      { "state": "WA", "band": "Negative / nil", "order": 1, "share": 1.7, "national_share": 2.0 },
+      { "state": "WA", "band": "<$500", "order": 2, "share": 7.0, "national_share": 10.6 },
+      { "state": "WA", "band": "$500–999", "order": 3, "share": 11.5, "national_share": 16.5 },
+      { "state": "WA", "band": "$1k–1.5k", "order": 4, "share": 14.5, "national_share": 15.0 },
+      { "state": "WA", "band": "$1.5k–2k", "order": 5, "share": 12.5, "national_share": 11.8 },
+      { "state": "WA", "band": "$2k–3k", "order": 6, "share": 20.5, "national_share": 19.8 },
+      { "state": "WA", "band": "$3k–4k", "order": 7, "share": 14.0, "national_share": 10.9 },
+      { "state": "WA", "band": "$4k+", "order": 8, "share": 18.3, "national_share": 13.4 },
+
+      { "state": "NSW", "band": "Negative / nil", "order": 1, "share": 1.8, "national_share": 2.0 },
+      { "state": "NSW", "band": "<$500", "order": 2, "share": 7.0, "national_share": 10.6 },
+      { "state": "NSW", "band": "$500–999", "order": 3, "share": 12.0, "national_share": 16.5 },
+      { "state": "NSW", "band": "$1k–1.5k", "order": 4, "share": 15.5, "national_share": 15.0 },
+      { "state": "NSW", "band": "$1.5k–2k", "order": 5, "share": 13.0, "national_share": 11.8 },
+      { "state": "NSW", "band": "$2k–3k", "order": 6, "share": 21.0, "national_share": 19.8 },
+      { "state": "NSW", "band": "$3k–4k", "order": 7, "share": 13.5, "national_share": 10.9 },
+      { "state": "NSW", "band": "$4k+", "order": 8, "share": 16.2, "national_share": 13.4 },
+
+      { "state": "VIC", "band": "Negative / nil", "order": 1, "share": 1.8, "national_share": 2.0 },
+      { "state": "VIC", "band": "<$500", "order": 2, "share": 7.5, "national_share": 10.6 },
+      { "state": "VIC", "band": "$500–999", "order": 3, "share": 12.5, "national_share": 16.5 },
+      { "state": "VIC", "band": "$1k–1.5k", "order": 4, "share": 16.0, "national_share": 15.0 },
+      { "state": "VIC", "band": "$1.5k–2k", "order": 5, "share": 13.0, "national_share": 11.8 },
+      { "state": "VIC", "band": "$2k–3k", "order": 6, "share": 20.5, "national_share": 19.8 },
+      { "state": "VIC", "band": "$3k–4k", "order": 7, "share": 13.0, "national_share": 10.9 },
+      { "state": "VIC", "band": "$4k+", "order": 8, "share": 15.7, "national_share": 13.4 },
+
+      { "state": "QLD", "band": "Negative / nil", "order": 1, "share": 2.0, "national_share": 2.0 },
+      { "state": "QLD", "band": "<$500", "order": 2, "share": 8.5, "national_share": 10.6 },
+      { "state": "QLD", "band": "$500–999", "order": 3, "share": 13.0, "national_share": 16.5 },
+      { "state": "QLD", "band": "$1k–1.5k", "order": 4, "share": 16.0, "national_share": 15.0 },
+      { "state": "QLD", "band": "$1.5k–2k", "order": 5, "share": 13.5, "national_share": 11.8 },
+      { "state": "QLD", "band": "$2k–3k", "order": 6, "share": 20.0, "national_share": 19.8 },
+      { "state": "QLD", "band": "$3k–4k", "order": 7, "share": 12.0, "national_share": 10.9 },
+      { "state": "QLD", "band": "$4k+", "order": 8, "share": 15.0, "national_share": 13.4 },
+
+      { "state": "SA", "band": "Negative / nil", "order": 1, "share": 2.3, "national_share": 2.0 },
+      { "state": "SA", "band": "<$500", "order": 2, "share": 10.0, "national_share": 10.6 },
+      { "state": "SA", "band": "$500–999", "order": 3, "share": 14.0, "national_share": 16.5 },
+      { "state": "SA", "band": "$1k–1.5k", "order": 4, "share": 16.5, "national_share": 15.0 },
+      { "state": "SA", "band": "$1.5k–2k", "order": 5, "share": 13.0, "national_share": 11.8 },
+      { "state": "SA", "band": "$2k–3k", "order": 6, "share": 18.5, "national_share": 19.8 },
+      { "state": "SA", "band": "$3k–4k", "order": 7, "share": 10.5, "national_share": 10.9 },
+      { "state": "SA", "band": "$4k+", "order": 8, "share": 15.2, "national_share": 13.4 },
+
+      { "state": "TAS", "band": "Negative / nil", "order": 1, "share": 2.8, "national_share": 2.0 },
+      { "state": "TAS", "band": "<$500", "order": 2, "share": 11.5, "national_share": 10.6 },
+      { "state": "TAS", "band": "$500–999", "order": 3, "share": 15.0, "national_share": 16.5 },
+      { "state": "TAS", "band": "$1k–1.5k", "order": 4, "share": 17.0, "national_share": 15.0 },
+      { "state": "TAS", "band": "$1.5k–2k", "order": 5, "share": 13.0, "national_share": 11.8 },
+      { "state": "TAS", "band": "$2k–3k", "order": 6, "share": 17.0, "national_share": 19.8 },
+      { "state": "TAS", "band": "$3k–4k", "order": 7, "share": 9.0, "national_share": 10.9 },
+      { "state": "TAS", "band": "$4k+", "order": 8, "share": 14.7, "national_share": 13.4 }
+    ]
+  },
+
+  "transform": [
+    {
+      "calculate": "datum.share - datum.national_share",
+      "as": "diff"
+    }
+  ],
+
+  "title": {
+    "text": "How do states differ from the national income profile?",
+    "subtitle": "Blue means a smaller-than-national share; gold means a larger-than-national share in that income group.",
+    "anchor": "start",
+    "font": "Georgia",
+    "fontSize": 24,
+    "fontWeight": "normal",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 14,
+    "subtitleColor": "#465564",
+    "offset": 18
+  },
+
+  "mark": {
+    "type": "rect",
+    "stroke": "#fffdf8",
+    "strokeWidth": 2
+  },
+
+  "encoding": {
+    "x": {
+      "field": "band",
+      "type": "ordinal",
+      "sort": {
+        "field": "order",
+        "op": "min",
+        "order": "ascending"
+      },
+      "axis": {
+        "title": null,
+        "labelFont": "Arial",
+        "labelFontSize": 12,
+        "labelColor": "#465564",
+        "labelAngle": 0,
+        "labelPadding": 10,
+        "tickSize": 0,
+        "domain": false
+      }
+    },
+
+    "y": {
+      "field": "state",
+      "type": "ordinal",
+      "sort": ["ACT", "NT", "WA", "NSW", "VIC", "QLD", "SA", "TAS"],
+      "axis": {
+        "title": null,
+        "labelFont": "Arial",
+        "labelFontSize": 12,
+        "labelFontWeight": "bold",
+        "labelColor": "#465564",
+        "labelPadding": 8,
+        "tickSize": 0,
+        "domain": false
+      }
+    },
+
+    "color": {
+      "field": "diff",
+      "type": "quantitative",
+      "scale": {
+        "domain": [-9, 0, 9],
+        "range": ["#5d7896", "#f6f1e8", "#c99b3d"]
+      },
+    "legend": {
+    "title": "Difference from national share (percentage points)",
+    "titleLimit": 500,
+
+    "titleFont": "Arial",
+    "titleFontSize": 12,
+    "titleFontWeight": "bold",
+    "titleColor": "#465564",
+
+    "labelFont": "Arial",
+    "labelFontSize": 11,
+    "labelColor": "#465564",
+
+    "values": [-8, -4, 0, 4, 8],
+
+    "gradientLength": 300,
+    "gradientThickness": 14,
+
+    "orient": "bottom",
+    "direction": "horizontal"
+    }
+    },
+
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "ordinal",
+        "title": "State / territory"
+      },
+      {
+        "field": "band",
+        "type": "ordinal",
+        "title": "Weekly household income"
+      },
+      {
+        "field": "share",
+        "type": "quantitative",
+        "title": "State share",
+        "format": ".1f"
+      },
+      {
+        "field": "national_share",
+        "type": "quantitative",
+        "title": "National share",
+        "format": ".1f"
+      },
+      {
+        "field": "diff",
+        "type": "quantitative",
+        "title": "Difference (pp)",
+        "format": "+.1f"
+      }
+    ]
+  },
+
+  "width": "container",
+
+  "height": {
+    "step": 48
+  },
+
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    }
+  }
+}
