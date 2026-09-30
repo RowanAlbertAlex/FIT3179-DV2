@@ -1,0 +1,173 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Proportional-symbol map comparing the scale and high-income share of Australian capital-city regions.",
+  "width": "container",
+  "height": 330,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "center": [
+      0,
+      -27
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "geo/07_states_mainland.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.state_code != '9'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e0d8",
+        "stroke": "#fffdf8",
+        "strokeWidth": 0.7
+      }
+    },
+    {
+      "data": {
+        "url": "data/07_city_proportional_symbols.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "households_income_stated": "number",
+            "households_3000_plus": "number",
+            "share_3000_plus": "number",
+            "longitude": "number",
+            "latitude": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "#fffdf8",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "households_3000_plus",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              210,
+              3200
+            ]
+          },
+          "legend": {
+            "title": "Number earning $3,000+",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "values": [
+              50000,
+              200000,
+              500000
+            ],
+            "format": "~s",
+            "titleFont": "Arial",
+            "titleFontSize": 11,
+            "titleFontWeight": "bold",
+            "labelFont": "Arial",
+            "labelFontSize": 10,
+            "titleColor": "#465564",
+            "labelColor": "#465564",
+            "symbolFillColor": "#61706d",
+            "symbolStrokeColor": "#fffdf8",
+            "symbolOpacity": 0.9,
+            "offset": 10
+          }
+        },
+        "color": {
+          "field": "share_3000_plus",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0.18,
+              0.4
+            ],
+            "range": [
+              "#b9d5cf",
+              "#15564f"
+            ]
+          },
+          "legend": {
+            "title": "Share earning $3,000+",
+            "orient": "top",
+            "direction": "horizontal",
+            "format": ".0%",
+            "gradientLength": 155,
+            "titleFont": "Arial",
+            "titleFontSize": 11,
+            "titleFontWeight": "bold",
+            "labelFont": "Arial",
+            "labelFontSize": 10,
+            "titleColor": "#465564",
+            "labelColor": "#465564",
+            "values": [
+              0.2,
+              0.3,
+              0.4
+            ],
+            "gradientThickness": 10,
+            "offset": 5
+          }
+        },
+        "tooltip": [
+          {
+            "field": "city_label",
+            "type": "nominal",
+            "title": "Capital-city region"
+          },
+          {
+            "field": "households_3000_plus",
+            "type": "quantitative",
+            "title": "Households earning $3,000+",
+            "format": ","
+          },
+          {
+            "field": "share_3000_plus",
+            "type": "quantitative",
+            "title": "Share earning $3,000+",
+            "format": ".1%"
+          },
+          {
+            "field": "households_income_stated",
+            "type": "quantitative",
+            "title": "Households reporting income",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    }
+  }
+}

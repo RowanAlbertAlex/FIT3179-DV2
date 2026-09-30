@@ -27,6 +27,7 @@
       </p>
     </header>
 
+
     <section class="chart-section">
 
       <h2>What does Australia’s income distribution actually look like?</h2>
@@ -44,9 +45,132 @@
 
     </section>
 
+
+    <section class="section-break">
+
+      <h2>State averages hide what happens locally.</h2>
+
+      <p>
+        The state profiles above differ, but they also share much of the same overall shape.
+        Looking within states reveals a wider story. SA2s are smaller local areas, and their
+        typical household incomes can vary substantially even when they belong to the same state.
+      </p>
+
+    </section>
+
+
+    <section class="chart-section second-section">
+
+      <div id="chart4"></div>
+
+
+      <div class="map-transition">
+
+        <h3>Where do those local differences actually appear?</h3>
+
+        <p>
+          The box plot shows that household incomes can vary widely even within the same state.
+          Mapping those same local areas reveals where higher-income households make up a
+          larger share of the community.
+        </p>
+
+      </div>
+
+
+      <div id="chart5"></div>
+
+
+      <section class="map-split">
+
+        <div class="map-copy">
+
+          <h3>The national view hides the detail inside major cities.</h3>
+
+          <p>
+            The choropleth compared the <strong>share</strong> of higher-income households.
+            Now the question changes from share to quantity. Each dot represents approximately
+            1,000 households earning $3,000 or more per week.
+          </p>
+
+          <p>
+            Use the dropdown to move between Australia's major capital-city regions and see
+            where those households are concentrated within each city.
+          </p>
+
+          <p>
+            Because this map encodes <strong>counts</strong>, dense Sydney and Melbourne clusters
+            partly reflect their larger populations. The choropleth above is the better view for
+            comparing prevalence; this map shows where higher-income households are numerous.
+          </p>
+
+          <p class="technical-note">
+            Dots are randomly placed within their source SA2. They show approximate
+            concentration, not exact household locations.
+          </p>
+
+        </div>
+
+        <div class="map-card">
+          <div class="map-card-heading">
+            <h4>Where are higher-income households concentrated?</h4>
+            <p>Each dot represents approximately 1,000 households earning $3,000+ per week.</p>
+          </div>
+
+          <div id="chart6"></div>
+        </div>
+
+      </section>
+
+
+      <section class="map-split map-seven">
+
+        <div class="map-card">
+          <div class="map-card-heading">
+            <h4>Which capital cities combine scale with high income?</h4>
+            <p>Circle size shows the number of $3,000+ households; colour shows their share of households reporting income.</p>
+          </div>
+
+          <div id="chart7"></div>
+        </div>
+
+        <div class="map-copy map-seven-copy">
+
+          <h3>Scale and income share tell different stories.</h3>
+
+          <p>
+            Larger cities naturally contain more households, so they also tend to contain more
+            high-income households in absolute terms. But that does not necessarily mean
+            higher-income households make up a larger share of the city.
+          </p>
+
+          <p>
+            Sydney contains about <strong>552,000</strong> households earning $3,000+ per week,
+            around <strong>32%</strong> of households reporting income. Canberra has far fewer
+            of these households — about <strong>61,000</strong> — but the highest share of the
+            capital-city regions shown, at about <strong>38%</strong>.
+          </p>
+
+          <p>
+            Reading both channels together separates <strong>scale</strong> from
+            <strong>prevalence</strong>: a large circle means many higher-income households,
+            while the darker colour indicates that they form a larger share of the city.
+          </p>
+
+          <p class="technical-note">
+            Circle <strong>area</strong>, not radius, represents household count. The symbols are
+            positioned at representative points within each capital-city region.
+          </p>
+
+        </div>
+
+      </section>
+
+    </section>
+
   </main>
 
-  <script src="js/main.js"></script>
+
+  <script src="js/main.js?v=9"></script>
 
 </body>
 

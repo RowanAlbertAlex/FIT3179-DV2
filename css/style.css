@@ -39,8 +39,12 @@ h1 {
   padding: 55px 0 90px;
 }
 
+.second-section {
+  padding-top: 20px;
+}
+
 h2 {
-  max-width: 800px;
+  max-width: 820px;
   margin: 0;
   font-family: Georgia, serif;
   font-size: 42px;
@@ -65,7 +69,9 @@ h2 {
 
 #chart1,
 #chart2,
-#chart3 {
+#chart3,
+#chart4,
+#chart5 {
   background: #fffdf8;
   padding: 20px 22px 16px;
   min-width: 0;
@@ -76,28 +82,202 @@ h2 {
   margin-top: 34px;
 }
 
+#chart4,
+#chart5 {
+  width: 100%;
+}
+
 #chart1 > div,
 #chart2 > div,
-#chart3 > div {
+#chart3 > div,
+#chart4 > div,
+#chart5 > div {
   height: 100%;
 }
 
 #chart3 .vega-embed,
 #chart3 .vega-embed > div,
 #chart3 canvas,
-#chart3 svg {
+#chart3 svg,
+#chart4 .vega-embed,
+#chart4 .vega-embed > div,
+#chart4 canvas,
+#chart4 svg,
+#chart5 .vega-embed,
+#chart5 .vega-embed > div,
+#chart5 canvas,
+#chart5 svg {
   width: 100%;
 }
 
+.section-break {
+  padding: 54px 0 32px;
+  border-top: 1px solid #d8d0c3;
+}
+
+.section-break h2 {
+  font-size: 44px;
+  max-width: 850px;
+}
+
+.section-break p {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: #465564;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.map-transition {
+  max-width: 740px;
+  margin: 52px 0 22px;
+}
+
+.map-transition h3 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+.map-transition p {
+  max-width: 700px;
+  margin: 11px 0 0;
+  color: #465564;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Paired geographic stories */
+.map-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+  margin-top: 46px;
+}
+
+/* The copy begins at the same vertical position as the title inside the map card. */
+.map-copy {
+  padding: 18px 8px 0 0;
+}
+
+.map-seven-copy {
+  padding: 18px 0 0 8px;
+}
+
+.map-copy h3 {
+  max-width: 500px;
+  margin: 0 0 18px;
+  font-family: Georgia, serif;
+  font-size: 31px;
+  line-height: 1.18;
+  font-weight: normal;
+}
+
+.map-copy p {
+  max-width: 500px;
+  margin: 0 0 16px;
+  color: #465564;
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.map-copy .technical-note {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid #d8d0c3;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.map-card {
+  min-width: 0;
+  background: #fffdf8;
+  padding: 18px 18px 14px;
+}
+
+.map-card-heading {
+  margin-bottom: 5px;
+}
+
+.map-card-heading h4 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  line-height: 1.18;
+  font-weight: normal;
+}
+
+.map-card-heading p {
+  margin: 3px 0 0;
+  color: #465564;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#chart6,
+#chart7 {
+  min-width: 0;
+  width: 100%;
+}
+
+#chart6 .vega-embed,
+#chart6 .vega-embed > div,
+#chart6 canvas,
+#chart6 svg,
+#chart7 .vega-embed,
+#chart7 .vega-embed > div,
+#chart7 canvas,
+#chart7 svg {
+  width: 100%;
+}
+
+#chart6 .vega-bindings {
+  margin: 5px 0 0;
+  color: #465564;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+#chart6 select {
+  margin-left: 5px;
+  padding: 5px 8px;
+  border: 1px solid #c8c0b5;
+  border-radius: 3px;
+  background: #fffdf8;
+  color: #17243a;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.map-seven {
+  margin-top: 30px;
+}
 
 @media (max-width: 900px) {
-  .chart-row {
+  .chart-row,
+  .map-split {
     grid-template-columns: 1fr;
+  }
+
+  .map-copy,
+  .map-seven-copy {
+    max-width: 700px;
+    padding: 0;
+  }
+
+  .map-seven .map-copy {
+    order: 1;
+  }
+
+  .map-seven .map-card {
+    order: 2;
   }
 }
 
 @media (max-width: 700px) {
-
   main {
     max-width: calc(100% - 28px);
   }
@@ -118,17 +298,55 @@ h2 {
     padding: 45px 0 60px;
   }
 
+  .second-section {
+    padding-top: 15px;
+  }
+
   h2 {
     font-size: 34px;
   }
 
   #chart1,
   #chart2,
-  #chart3 {
+  #chart3,
+  #chart4,
+  #chart5 {
     padding: 14px;
   }
 
   #chart3 {
     margin-top: 24px;
+  }
+
+  .section-break {
+    padding: 42px 0 26px;
+  }
+
+  .section-break h2 {
+    font-size: 36px;
+  }
+
+  .map-transition {
+    margin-top: 42px;
+  }
+
+  .map-transition h3 {
+    font-size: 26px;
+  }
+
+  .map-split {
+    margin-top: 40px;
+  }
+
+  .map-card {
+    padding: 14px;
+  }
+
+  .map-card-heading h4 {
+    font-size: 22px;
+  }
+
+  .map-copy h3 {
+    font-size: 27px;
   }
 }

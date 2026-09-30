@@ -1,0 +1,233 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "description": "Choropleth showing the share of households earning $3,000 or more per week across Australian SA2 areas.",
+
+  "width": "container",
+  "height": 590,
+
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-18, -36],
+    "rotate": [-134, 0, 0],
+    "center": [0, -27]
+  },
+
+  "title": {
+    "text": "Where is high household income common?",
+    "subtitle": "Colour shows the share of households earning $3,000+ per week. SA2s with fewer than 500 households reporting income remain grey.",
+    "anchor": "start",
+    "font": "Georgia",
+    "fontSize": 24,
+    "fontWeight": "normal",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 14,
+    "subtitleColor": "#465564",
+    "offset": 20
+  },
+
+  "layer": [
+    {
+      "data": {
+        "url": "geo/sa2_2021_web_compact.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.properties.state_code != '9'"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ddd9d1",
+        "stroke": "#fffdf8",
+        "strokeWidth": 0.25
+      }
+    },
+
+    {
+      "data": {
+        "url": "geo/sa2_2021_web_compact.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.properties.state_code != '9'"
+        },
+
+        {
+          "lookup": "properties.sa2_code",
+
+          "from": {
+            "data": {
+              "url": "data/06_sa2_income_housing_summary_2021.csv",
+
+              "format": {
+                "type": "csv",
+
+                "parse": {
+                  "sa2_code": "string",
+                  "share_3000_plus": "number",
+                  "map_quality_500plus": "number",
+                  "households_income_stated": "number",
+                  "median_household_income_weekly": "number"
+                }
+              }
+            },
+
+            "key": "sa2_code",
+
+            "fields": [
+              "state_abbr",
+              "gcc_name",
+              "share_3000_plus",
+              "map_quality_500plus",
+              "households_income_stated",
+              "median_household_income_weekly"
+            ]
+          }
+        },
+
+        {
+          "filter": "datum.map_quality_500plus == 1"
+        },
+
+        {
+          "calculate": "datum.share_3000_plus < 0.10 ? 'Under 10%' : datum.share_3000_plus < 0.20 ? '10–20%' : datum.share_3000_plus < 0.30 ? '20–30%' : datum.share_3000_plus < 0.40 ? '30–40%' : datum.share_3000_plus < 0.50 ? '40–50%' : '50%+'",
+          "as": "income_band"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#fffdf8",
+        "strokeWidth": 0.3
+      },
+
+      "encoding": {
+        "color": {
+          "field": "income_band",
+          "type": "nominal",
+
+          "scale": {
+            "domain": [
+              "Under 10%",
+              "10–20%",
+              "20–30%",
+              "30–40%",
+              "40–50%",
+              "50%+"
+            ],
+
+            "range": [
+              "#d5e5e2",
+              "#afd0ca",
+              "#82b3aa",
+              "#56958a",
+              "#31786e",
+              "#15564f"
+            ]
+          },
+
+          "legend": {
+            "title": "Households earning $3,000+",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 6,
+
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "bold",
+            "titleColor": "#465564",
+
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#465564",
+            "labelLimit": 80,
+
+            "symbolType": "square",
+            "symbolSize": 180,
+
+            "columnPadding": 16,
+            "rowPadding": 6
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "properties.sa2_name",
+            "type": "nominal",
+            "title": "SA2"
+          },
+
+          {
+            "field": "state_abbr",
+            "type": "nominal",
+            "title": "State"
+          },
+
+          {
+            "field": "share_3000_plus",
+            "type": "quantitative",
+            "title": "Earning $3,000+",
+            "format": ".1%"
+          },
+
+          {
+            "field": "median_household_income_weekly",
+            "type": "quantitative",
+            "title": "Median weekly income",
+            "format": "$,.0f"
+          },
+
+          {
+            "field": "households_income_stated",
+            "type": "quantitative",
+            "title": "Households reporting income",
+            "format": ","
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "url": "geo/states_2021_web.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.properties.state_code != '9'"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#6f6a63",
+        "strokeWidth": 0.9
+      }
+    }
+  ],
+
+  "config": {
+    "background": null,
+
+    "view": {
+      "stroke": null
+    }
+  }
+}

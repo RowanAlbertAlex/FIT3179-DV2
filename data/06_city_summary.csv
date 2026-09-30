@@ -1,0 +1,9 @@
+gcc_name,households_income_stated,households_3000_plus,dot_count,city_label,share_3000_plus
+Greater Sydney,1724283,551840,552,Greater Sydney,0.3200402718115298
+Greater Melbourne,1677206,452162,452,Greater Melbourne,0.2695924054648028
+Greater Brisbane,853074,216638,217,Greater Brisbane,0.25394983319149333
+Greater Perth,708517,188851,189,Greater Perth,0.26654406316291634
+Greater Adelaide,502869,97609,98,Greater Adelaide,0.1941042299286693
+Australian Capital Territory,159875,61192,61,Canberra / ACT,0.38274902267396405
+Greater Hobart,88789,16805,17,Greater Hobart,0.18926894097241775
+Greater Darwin,42192,13494,13,Greater Darwin,0.3198236632536974

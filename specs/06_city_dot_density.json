@@ -1,0 +1,312 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Interactive dot-density map of higher-income households within Australian capital-city regions.",
+  "width": 500,
+  "height": 330,
+  "padding": {
+    "top": 6,
+    "left": 4,
+    "right": 4,
+    "bottom": 14
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "signals": [
+    {
+      "name": "selectedCity",
+      "value": "Greater Melbourne",
+      "bind": {
+        "input": "select",
+        "name": "City: ",
+        "options": [
+          "Greater Sydney",
+          "Greater Melbourne",
+          "Greater Brisbane",
+          "Greater Perth",
+          "Greater Adelaide",
+          "Australian Capital Territory",
+          "Greater Hobart",
+          "Greater Darwin"
+        ],
+        "labels": [
+          "Greater Sydney",
+          "Greater Melbourne",
+          "Greater Brisbane",
+          "Greater Perth",
+          "Greater Adelaide",
+          "Canberra / ACT",
+          "Greater Hobart",
+          "Greater Darwin"
+        ]
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": "cityShapes",
+      "url": "geo/06_major_city_sa2.geojson",
+      "format": {
+        "type": "json",
+        "property": "features"
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.properties.gcc_name === selectedCity"
+        }
+      ]
+    },
+    {
+      "name": "cityGeo",
+      "source": "cityShapes",
+      "transform": [
+        {
+          "type": "geojson",
+          "signal": "selectedCityGeo"
+        }
+      ]
+    },
+    {
+      "name": "dots",
+      "url": "data/06_high_income_dots.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "longitude": "number",
+          "latitude": "number",
+          "households_per_dot": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.gcc_name === selectedCity"
+        },
+        {
+          "type": "geopoint",
+          "projection": "cityProjection",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "citySummary",
+      "url": "data/06_city_summary.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "households_income_stated": "number",
+          "households_3000_plus": "number",
+          "dot_count": "number",
+          "share_3000_plus": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.gcc_name === selectedCity"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "cityProjection",
+      "type": "mercator",
+      "fit": {
+        "signal": "selectedCityGeo"
+      },
+      "extent": {
+        "signal": "[[8, 18], [width - 8, height - 38]]"
+      }
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {
+        "data": "cityShapes"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#ded9cf"
+          },
+          "stroke": {
+            "value": "#fffdf8"
+          },
+          "strokeWidth": {
+            "value": 0.3
+          }
+        }
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "cityProjection"
+        }
+      ]
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "dots"
+      },
+      "encode": {
+        "enter": {
+          "size": {
+            "value": 25
+          },
+          "fill": {
+            "value": "#15564f"
+          },
+          "fillOpacity": {
+            "value": 0.62
+          },
+          "stroke": {
+            "value": "#fffdf8"
+          },
+          "strokeWidth": {
+            "value": 0.2
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "tooltip": {
+            "signal": "{'SA2': datum.sa2_name, 'Represents': '\u2248 1,000 households earning $3,000+ per week'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "citySummary"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 2
+          },
+          "y": {
+            "value": 2
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#465564"
+          },
+          "baseline": {
+            "value": "top"
+          }
+        },
+        "update": {
+          "text": {
+            "field": "city_label"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 2
+          },
+          "y": {
+            "signal": "height - 5"
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "symbol",
+          "encode": {
+            "enter": {
+              "x": {
+                "value": 5
+              },
+              "y": {
+                "value": 0
+              },
+              "size": {
+                "value": 32
+              },
+              "fill": {
+                "value": "#15564f"
+              },
+              "fillOpacity": {
+                "value": 0.65
+              },
+              "stroke": {
+                "value": "#fffdf8"
+              },
+              "strokeWidth": {
+                "value": 0.2
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {
+                "value": 18
+              },
+              "y": {
+                "value": 0
+              },
+              "text": {
+                "value": "\u2248 1,000 households earning $3,000+ per week"
+              },
+              "font": {
+                "value": "Arial"
+              },
+              "fontSize": {
+                "value": 11
+              },
+              "fill": {
+                "value": "#465564"
+              },
+              "baseline": {
+                "value": "middle"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": null,
+    "style": {
+      "cell": {
+        "stroke": null
+      }
+    }
+  }
+}
