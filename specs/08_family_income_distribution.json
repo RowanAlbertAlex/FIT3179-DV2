@@ -1,0 +1,314 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "description": "100% stacked bar chart comparing weekly family-income distributions across Australian family types in 2021.",
+
+  "data": {
+    "url": "data/08_family_income_distribution_2021.csv",
+
+    "format": {
+      "type": "csv",
+
+      "parse": {
+        "families": "number",
+        "families_stated_total": "number",
+        "share": "number",
+        "family_order": "number",
+        "income_order": "number"
+      }
+    }
+  },
+
+  "transform": [
+    {
+      "stack": "families",
+
+      "groupby": [
+        "family_short"
+      ],
+
+      "sort": [
+        {
+          "field": "income_order",
+          "order": "ascending"
+        }
+      ],
+
+      "offset": "normalize",
+
+      "as": [
+        "x0",
+        "x1"
+      ]
+    },
+
+    {
+      "calculate": "(datum.x0 + datum.x1) / 2",
+      "as": "xmid"
+    },
+
+    {
+      "calculate": "datum.x1 - datum.x0",
+      "as": "segment_share"
+    },
+
+    {
+      "calculate": "datum.segment_share >= 0.055 ? format(datum.segment_share, '.0%') : ''",
+      "as": "segment_label"
+    }
+  ],
+
+  "width": "container",
+
+  "height": {
+    "step": 58
+  },
+
+  "layer": [
+
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fffdf8",
+        "strokeWidth": 1.5
+      },
+
+      "encoding": {
+
+        "y": {
+          "field": "family_short",
+          "type": "ordinal",
+
+          "sort": [
+            "Couple + children",
+            "Couple, no children",
+            "One-parent",
+            "Other"
+          ],
+
+          "scale": {
+            "paddingInner": 0.15,
+            "paddingOuter": 0.08
+          },
+
+          "axis": {
+            "title": null,
+
+            "domain": false,
+            "ticks": false,
+
+            "labelFont": "Arial",
+            "labelFontSize": 12,
+            "labelColor": "#465564",
+
+            "labelPadding": 10,
+            "labelLimit": 140
+          }
+        },
+
+
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          },
+
+          "axis": {
+            "title": "Share within family type",
+
+            "values": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ],
+
+            "format": ".0%",
+
+            "grid": false,
+            "domain": false,
+
+            "tickColor": "#b8b0a5",
+
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#465564",
+
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "normal",
+            "titleColor": "#465564",
+
+            "titlePadding": 9
+          }
+        },
+
+
+        "x2": {
+          "field": "x1"
+        },
+
+
+        "color": {
+          "field": "income_group",
+          "type": "nominal",
+
+          "scale": {
+            "domain": [
+              "Below $1,000",
+              "$1,000–$1,999",
+              "$2,000–$2,999",
+              "$3,000+"
+            ],
+
+            "range": [
+              "#d5e5e2",
+              "#a8cbc5",
+              "#629c93",
+              "#195e56"
+            ]
+          },
+
+          "legend": {
+            "title": "Weekly family income",
+
+            "orient": "bottom",
+            "direction": "horizontal",
+
+            "columns": 4,
+
+            "titleFont": "Arial",
+            "titleFontSize": 11,
+            "titleFontWeight": "bold",
+            "titleColor": "#465564",
+
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#465564",
+
+            "symbolType": "square",
+            "symbolSize": 120,
+
+            "columnPadding": 24,
+            "rowPadding": 4,
+
+            "offset": 12
+          }
+        },
+
+
+        "tooltip": [
+          {
+            "field": "family_type_label",
+            "type": "nominal",
+            "title": "Family type"
+          },
+
+          {
+            "field": "income_group",
+            "type": "nominal",
+            "title": "Weekly family income"
+          },
+
+          {
+            "field": "families",
+            "type": "quantitative",
+            "title": "Families",
+            "format": ","
+          },
+
+          {
+            "field": "segment_share",
+            "type": "quantitative",
+            "title": "Share within type",
+            "format": ".1%"
+          }
+        ]
+      }
+    },
+
+
+    {
+      "transform": [
+        {
+          "filter": "datum.segment_label != ''"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+
+        "font": "Arial",
+        "fontSize": 11,
+        "fontWeight": "bold",
+
+        "align": "center",
+        "baseline": "middle"
+      },
+
+      "encoding": {
+
+        "y": {
+          "field": "family_short",
+          "type": "ordinal",
+
+          "sort": [
+            "Couple + children",
+            "Couple, no children",
+            "One-parent",
+            "Other"
+          ],
+
+          "scale": {
+            "paddingInner": 0.15,
+            "paddingOuter": 0.08
+          }
+        },
+
+
+        "x": {
+          "field": "xmid",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
+        },
+
+
+        "text": {
+          "field": "segment_label"
+        },
+
+
+        "color": {
+          "condition": {
+            "test": "datum.income_order >= 3",
+            "value": "#fffdf8"
+          },
+
+          "value": "#17243a"
+        }
+      }
+    }
+
+  ],
+
+  "config": {
+
+    "background": null,
+
+    "view": {
+      "stroke": null
+    }
+  }
+}

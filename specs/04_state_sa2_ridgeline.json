@@ -1,0 +1,356 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "description": "Ridgeline plot comparing the distribution of SA2 median weekly household incomes across Australian states and territories.",
+
+  "data": {
+    "url": "data/06_sa2_income_housing_summary_2021.csv",
+
+    "format": {
+      "type": "csv",
+
+      "parse": {
+        "median_household_income_weekly": "number",
+        "map_quality_1000plus": "number"
+      }
+    }
+  },
+
+  "transform": [
+    {
+      "filter": "datum.map_quality_1000plus == 1 && isValid(datum.median_household_income_weekly)"
+    },
+
+    {
+      "density": "median_household_income_weekly",
+
+      "groupby": [
+        "state_abbr"
+      ],
+
+      "extent": [
+        750,
+        4200
+      ],
+
+      "steps": 150,
+
+      "as": [
+        "income",
+        "density"
+      ]
+    },
+
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "density",
+          "as": "state_max_density"
+        }
+      ],
+
+      "groupby": [
+        "state_abbr"
+      ]
+    },
+
+    {
+      "calculate": "datum.density / datum.state_max_density",
+      "as": "relative_density"
+    },
+
+    {
+      "calculate": "datum.state_abbr == 'ACT' ? 8 : datum.state_abbr == 'NT' ? 7 : datum.state_abbr == 'VIC' ? 6 : datum.state_abbr == 'WA' ? 5 : datum.state_abbr == 'NSW' ? 4 : datum.state_abbr == 'QLD' ? 3 : datum.state_abbr == 'SA' ? 2 : 1",
+      "as": "state_position"
+    },
+
+    {
+      "calculate": "datum.state_position + datum.relative_density * 0.72",
+      "as": "ridge_top"
+    }
+  ],
+
+  "width": "container",
+
+  "height": 410,
+
+  "title": {
+    "text": "Local incomes cluster differently within each state",
+
+    "subtitle": [
+      "Each ridge shows the distribution of local SA2 median household incomes.",
+      "Further right means higher local income; taller sections mean more SA2s cluster around that level."
+    ],
+
+    "anchor": "start",
+
+    "font": "Georgia",
+    "fontSize": 24,
+    "fontWeight": "normal",
+
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 13,
+    "subtitleLineHeight": 18,
+    "subtitleColor": "#465564",
+
+    "offset": 20
+  },
+
+  "layer": [
+
+    {
+      "data": {
+        "values": [
+          {
+            "state": "ACT",
+            "position": 8
+          },
+          {
+            "state": "NT",
+            "position": 7
+          },
+          {
+            "state": "VIC",
+            "position": 6
+          },
+          {
+            "state": "WA",
+            "position": 5
+          },
+          {
+            "state": "NSW",
+            "position": 4
+          },
+          {
+            "state": "QLD",
+            "position": 3
+          },
+          {
+            "state": "SA",
+            "position": 2
+          },
+          {
+            "state": "TAS",
+            "position": 1
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "rule",
+        "stroke": "#d7d1c7",
+        "strokeWidth": 1
+      },
+
+      "encoding": {
+        "x": {
+          "datum": 750,
+          "type": "quantitative"
+        },
+
+        "x2": {
+          "datum": 4200
+        },
+
+        "y": {
+          "field": "position",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [
+              0.7,
+              8.9
+            ]
+          },
+
+          "axis": null
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "area",
+
+        "interpolate": "monotone",
+
+        "fill": "#7fada5",
+        "fillOpacity": 0.82,
+
+        "stroke": "#367a73",
+        "strokeWidth": 1.4
+      },
+
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [
+              750,
+              4200
+            ]
+          },
+
+          "axis": {
+            "title": "Median weekly household income of local SA2 ($)",
+
+            "values": [
+              1000,
+              1500,
+              2000,
+              2500,
+              3000,
+              3500,
+              4000
+            ],
+
+            "labelExpr": "'$' + format(datum.value, ',.0f')",
+
+            "grid": false,
+
+            "domainColor": "#aaa298",
+            "tickColor": "#aaa298",
+
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#465564",
+
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "normal",
+            "titleColor": "#465564",
+
+            "titlePadding": 12
+          }
+        },
+
+        "y": {
+          "field": "ridge_top",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [
+              0.7,
+              8.9
+            ]
+          },
+
+          "axis": null
+        },
+
+        "y2": {
+          "field": "state_position"
+        },
+
+        "detail": {
+          "field": "state_abbr"
+        },
+
+        "tooltip": [
+          {
+            "field": "state_abbr",
+            "type": "nominal",
+            "title": "State"
+          },
+
+          {
+            "field": "income",
+            "type": "quantitative",
+            "title": "Local income level",
+            "format": "$,.0f"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "state": "ACT",
+            "position": 8
+          },
+          {
+            "state": "NT",
+            "position": 7
+          },
+          {
+            "state": "VIC",
+            "position": 6
+          },
+          {
+            "state": "WA",
+            "position": 5
+          },
+          {
+            "state": "NSW",
+            "position": 4
+          },
+          {
+            "state": "QLD",
+            "position": 3
+          },
+          {
+            "state": "SA",
+            "position": 2
+          },
+          {
+            "state": "TAS",
+            "position": 1
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "text",
+
+        "align": "right",
+        "baseline": "middle",
+
+        "dx": -10,
+        "dy": -7,
+
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+
+        "color": "#465564"
+      },
+
+      "encoding": {
+        "x": {
+          "datum": 750,
+          "type": "quantitative"
+        },
+
+        "y": {
+          "field": "position",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [
+              0.7,
+              8.9
+            ]
+          }
+        },
+
+        "text": {
+          "field": "state"
+        }
+      }
+    }
+
+  ],
+
+  "config": {
+    "background": null,
+
+    "view": {
+      "stroke": null
+    }
+  }
+}

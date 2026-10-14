@@ -14,21 +14,25 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
 </head>
 
+
 <body>
 
   <main>
 
+
     <header>
+
       <h1>Beyond the Median</h1>
 
       <p class="intro">
         Australia’s median household earned $1,746 a week in 2021. But that single number
         hides a much wider distribution of household incomes across the country.
       </p>
+
     </header>
 
 
-    <section class="chart-section">
+    <section class="chart-section opening-charts">
 
       <h2>What does Australia’s income distribution actually look like?</h2>
 
@@ -36,10 +40,15 @@
         Before looking at where income differs across Australia, start with the national picture.
       </p>
 
+
       <div class="chart-row">
+
         <div id="chart1"></div>
+
         <div id="chart2"></div>
+
       </div>
+
 
       <div id="chart3"></div>
 
@@ -69,9 +78,9 @@
         <h3>Where do those local differences actually appear?</h3>
 
         <p>
-          The box plot shows that household incomes can vary widely even within the same state.
-          Mapping those same local areas reveals where higher-income households make up a
-          larger share of the community.
+          The distributions above show that local income levels can vary substantially even
+          within the same state. Mapping those same local areas reveals where higher-income
+          households make up a larger share of the community.
         </p>
 
       </div>
@@ -103,20 +112,23 @@
             comparing prevalence; this map shows where higher-income households are numerous.
           </p>
 
-          <p class="technical-note">
-            Dots are randomly placed within their source SA2. They show approximate
-            concentration, not exact household locations.
-          </p>
-
         </div>
 
+
         <div class="map-card">
+
           <div class="map-card-heading">
+
             <h4>Where are higher-income households concentrated?</h4>
-            <p>Each dot represents approximately 1,000 households earning $3,000+ per week.</p>
+
+            <p>
+              Each dot represents approximately 1,000 households earning $3,000+ per week.
+            </p>
+
           </div>
 
           <div id="chart6"></div>
+
         </div>
 
       </section>
@@ -125,22 +137,31 @@
       <section class="map-split map-seven">
 
         <div class="map-card">
+
           <div class="map-card-heading">
+
             <h4>Which capital cities combine scale with high income?</h4>
-            <p>Circle size shows the number of $3,000+ households; colour shows their share of households reporting income.</p>
+
+            <p>
+              Circle size shows the number of $3,000+ households; colour shows their share
+              of households reporting income.
+            </p>
+
           </div>
 
           <div id="chart7"></div>
+
         </div>
+
 
         <div class="map-copy map-seven-copy">
 
           <h3>Scale and income share tell different stories.</h3>
 
           <p>
-            Larger cities naturally contain more households, so they also tend to contain more
-            high-income households in absolute terms. But that does not necessarily mean
-            higher-income households make up a larger share of the city.
+            Larger cities naturally contain more households, so they also tend to contain
+            more high-income households in absolute terms. But that does not necessarily
+            mean higher-income households make up a larger share of the city.
           </p>
 
           <p>
@@ -156,9 +177,10 @@
             while the darker colour indicates that they form a larger share of the city.
           </p>
 
-          <p class="technical-note">
-            Circle <strong>area</strong>, not radius, represents household count. The symbols are
-            positioned at representative points within each capital-city region.
+          <p>
+            This means the largest cities do not automatically have the strongest
+            high-income profile. Sydney stands out for the number of higher-income households,
+            while Canberra stands out for how common those households are within the city.
           </p>
 
         </div>
@@ -167,10 +189,78 @@
 
     </section>
 
+
+    <section class="section-break household-section">
+
+      <h2>The household behind the number.</h2>
+
+      <p>
+        Place is only one part of the story. Family structure changes how an income total
+        should be interpreted. For this section, the measure switches from household income
+        to <strong>weekly family income</strong> so different family types can be compared directly.
+      </p>
+
+    </section>
+
+
+    <section class="chart-section household-charts">
+
+      <article class="family-card">
+
+        <div class="family-card-heading">
+
+          <h4>Family type shifts the whole income distribution</h4>
+
+          <p>
+            Each row represents one family type. The coloured segments show how its weekly
+            family income is distributed across four broad income groups.
+          </p>
+
+        </div>
+
+        <div id="chart8"></div>
+
+      </article>
+
+    </section>
+
+
+    <section class="section-break">
+
+      <h2>More income does not always mean more purchasing power.</h2>
+
+      <p>
+        The Census figures above describe household and family income at a point in time,
+        but they do not account for how rising living costs affect what that income can buy.
+        For this final part of the story, the measure changes again to
+        <strong>real equivalised disposable household income</strong>.
+      </p>
+
+      <p>
+        This measure adjusts income for inflation and household size. Across all households,
+        the estimate changed little between 2021 and 2024 — from about
+        <strong>$1,455</strong> to <strong>$1,464 per week</strong>. But that stable national
+        figure hides different outcomes across the income distribution.
+      </p>
+
+    </section>
+
+
+    <section class="chart-section household-charts">
+
+      <article class="family-card">
+
+        <div id="chart9"></div>
+
+      </article>
+
+    </section>
+
+
   </main>
 
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=23"></script>
 
 </body>
 

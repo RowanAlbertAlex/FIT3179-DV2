@@ -15,7 +15,7 @@
 
   "title": {
     "text": "Where is high household income common?",
-    "subtitle": "Colour shows the share of households earning $3,000+ per week. SA2s with fewer than 500 households reporting income remain grey.",
+    "subtitle": "Colour shows the share of households earning $3,000+ per week. Grey areas have fewer than 500 households reporting income.",
     "anchor": "start",
     "font": "Georgia",
     "fontSize": 24,
@@ -27,32 +27,11 @@
   },
 
   "layer": [
-    {
-      "data": {
-        "url": "geo/sa2_2021_web_compact.geojson",
-        "format": {
-          "type": "json",
-          "property": "features"
-        }
-      },
-
-      "transform": [
-        {
-          "filter": "datum.properties.state_code != '9'"
-        }
-      ],
-
-      "mark": {
-        "type": "geoshape",
-        "fill": "#ddd9d1",
-        "stroke": "#fffdf8",
-        "strokeWidth": 0.25
-      }
-    },
 
     {
       "data": {
         "url": "geo/sa2_2021_web_compact.geojson",
+
         "format": {
           "type": "json",
           "property": "features"
@@ -98,11 +77,7 @@
         },
 
         {
-          "filter": "datum.map_quality_500plus == 1"
-        },
-
-        {
-          "calculate": "datum.share_3000_plus < 0.10 ? 'Under 10%' : datum.share_3000_plus < 0.20 ? '10–20%' : datum.share_3000_plus < 0.30 ? '20–30%' : datum.share_3000_plus < 0.40 ? '30–40%' : datum.share_3000_plus < 0.50 ? '40–50%' : '50%+'",
+          "calculate": "datum.map_quality_500plus != 1 ? 'Insufficient data (<500 reporting income)' : datum.share_3000_plus < 0.10 ? 'Under 10%' : datum.share_3000_plus < 0.20 ? '10–20%' : datum.share_3000_plus < 0.30 ? '20–30%' : datum.share_3000_plus < 0.40 ? '30–40%' : datum.share_3000_plus < 0.50 ? '40–50%' : '50%+'",
           "as": "income_band"
         }
       ],
@@ -114,12 +89,14 @@
       },
 
       "encoding": {
+
         "color": {
           "field": "income_band",
           "type": "nominal",
 
           "scale": {
             "domain": [
+              "Insufficient data (<500 reporting income)",
               "Under 10%",
               "10–20%",
               "20–30%",
@@ -129,6 +106,7 @@
             ],
 
             "range": [
+              "#ddd9d1",
               "#d5e5e2",
               "#afd0ca",
               "#82b3aa",
@@ -139,10 +117,10 @@
           },
 
           "legend": {
-            "title": "Households earning $3,000+",
+            "title": "Share of households earning $3,000+",
             "orient": "bottom",
             "direction": "horizontal",
-            "columns": 6,
+            "columns": 7,
 
             "titleFont": "Arial",
             "titleFontSize": 12,
@@ -152,17 +130,18 @@
             "labelFont": "Arial",
             "labelFontSize": 11,
             "labelColor": "#465564",
-            "labelLimit": 80,
+            "labelLimit": 230,
 
             "symbolType": "square",
             "symbolSize": 180,
 
-            "columnPadding": 16,
+            "columnPadding": 15,
             "rowPadding": 6
           }
         },
 
         "tooltip": [
+
           {
             "field": "properties.sa2_name",
             "type": "nominal",
@@ -173,6 +152,12 @@
             "field": "state_abbr",
             "type": "nominal",
             "title": "State"
+          },
+
+          {
+            "field": "income_band",
+            "type": "nominal",
+            "title": "Income category"
           },
 
           {
@@ -195,13 +180,16 @@
             "title": "Households reporting income",
             "format": ","
           }
+
         ]
       }
     },
 
+
     {
       "data": {
         "url": "geo/states_2021_web.geojson",
+
         "format": {
           "type": "json",
           "property": "features"
@@ -221,13 +209,16 @@
         "strokeWidth": 0.9
       }
     }
+
   ],
 
   "config": {
+
     "background": null,
 
     "view": {
       "stroke": null
     }
+
   }
 }
