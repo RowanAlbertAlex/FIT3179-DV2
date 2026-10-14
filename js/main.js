@@ -36,8 +36,3 @@ vegaEmbed("#chart7", "specs/07_city_proportional_symbols.json", {
 vegaEmbed("#chart8", "specs/08_family_income_distribution.json", {
   actions: false
 }).catch(console.error);
-
-
-vegaEmbed("#chart9", "specs/09_real_income_slopegraph.json", {
-  actions: false
-}).catch(console.error);
