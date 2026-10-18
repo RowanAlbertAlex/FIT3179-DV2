@@ -15,13 +15,17 @@
 
   "title": {
     "text": "Where is high household income common?",
-    "subtitle": "Colour shows the share of households earning $3,000+ per week. Grey areas have fewer than 500 households reporting income.",
+    "subtitle": [
+      "Colour shows the share of households earning $3,000+.",
+      "Grey indicates fewer than 500 households reporting income."
+    ],
     "anchor": "start",
     "font": "Georgia",
     "fontSize": 24,
     "fontWeight": "normal",
     "subtitleFont": "Arial",
     "subtitleFontSize": 14,
+    "subtitleLineHeight": 20,
     "subtitleColor": "#465564",
     "offset": 20
   },
@@ -117,18 +121,18 @@
           },
 
           "legend": {
-            "title": "Share of households earning $3,000+",
+            "title": "Share earning $3,000+",
             "orient": "bottom",
             "direction": "horizontal",
             "columns": 7,
 
             "titleFont": "Arial",
-            "titleFontSize": 12,
+            "titleFontSize": 13,
             "titleFontWeight": "bold",
             "titleColor": "#465564",
 
             "labelFont": "Arial",
-            "labelFontSize": 11,
+            "labelFontSize": 12,
             "labelColor": "#465564",
             "labelLimit": 230,
 

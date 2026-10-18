@@ -137,11 +137,11 @@
             "tickColor": "#b8b0a5",
 
             "labelFont": "Arial",
-            "labelFontSize": 11,
+            "labelFontSize": 12,
             "labelColor": "#465564",
 
             "titleFont": "Arial",
-            "titleFontSize": 12,
+            "titleFontSize": 13,
             "titleFontWeight": "normal",
             "titleColor": "#465564",
 
@@ -184,12 +184,12 @@
             "columns": 4,
 
             "titleFont": "Arial",
-            "titleFontSize": 11,
+            "titleFontSize": 13,
             "titleFontWeight": "bold",
             "titleColor": "#465564",
 
             "labelFont": "Arial",
-            "labelFontSize": 11,
+            "labelFontSize": 13,
             "labelColor": "#465564",
 
             "symbolType": "square",
@@ -245,7 +245,7 @@
         "type": "text",
 
         "font": "Arial",
-        "fontSize": 11,
+        "fontSize": 12,
         "fontWeight": "bold",
 
         "align": "center",

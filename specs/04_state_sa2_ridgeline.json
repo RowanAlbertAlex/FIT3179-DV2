@@ -79,8 +79,8 @@
     "text": "Local incomes cluster differently within each state",
 
     "subtitle": [
-      "Each ridge shows the distribution of local SA2 median household incomes.",
-      "Further right means higher local income; taller sections mean more SA2s cluster around that level."
+      "Each ridge shows local SA2 median household incomes.",
+      "Further right means higher income; peaks show where values cluster."
     ],
 
     "anchor": "start",
@@ -90,8 +90,8 @@
     "fontWeight": "normal",
 
     "subtitleFont": "Arial",
-    "subtitleFontSize": 13,
-    "subtitleLineHeight": 18,
+    "subtitleFontSize": 14,
+    "subtitleLineHeight": 20,
     "subtitleColor": "#465564",
 
     "offset": 20
@@ -218,11 +218,11 @@
             "tickColor": "#aaa298",
 
             "labelFont": "Arial",
-            "labelFontSize": 11,
+            "labelFontSize": 12,
             "labelColor": "#465564",
 
             "titleFont": "Arial",
-            "titleFontSize": 12,
+            "titleFontSize": 13,
             "titleFontWeight": "normal",
             "titleColor": "#465564",
 

@@ -41,6 +41,7 @@
     "fontWeight": "normal",
     "subtitleFont": "Arial",
     "subtitleFontSize": 14,
+    "subtitleLineHeight": 20,
     "subtitleColor": "#465564",
     "offset": 18
   },
@@ -66,7 +67,7 @@
           "axis": {
             "title": null,
             "labelFont": "Arial",
-            "labelFontSize": 11,
+            "labelFontSize": 12,
             "labelColor": "#465564",
             "labelPadding": 6,
             "ticks": false,
@@ -85,7 +86,7 @@
           "axis": {
             "title": "Share of households",
             "titleFont": "Arial",
-            "titleFontSize": 12,
+            "titleFontSize": 13,
             "titleFontWeight": "normal",
             "titleColor": "#465564",
             "titlePadding": 10,
@@ -93,7 +94,7 @@
             "values": [0, 5, 10, 15],
 
             "labelFont": "Arial",
-            "labelFontSize": 11,
+            "labelFontSize": 12,
             "labelColor": "#465564",
             "labelExpr": "datum.value + '%'",
 

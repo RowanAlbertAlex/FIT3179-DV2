@@ -35,7 +35,7 @@ h1 {
   margin: 0;
 
   font-family: Georgia, serif;
-  font-size: 72px;
+  font-size: 76px;
   font-weight: normal;
 }
 
@@ -318,8 +318,9 @@ h2 {
 
   color: #465564;
 
-  font-size: 12px;
-  line-height: 1.4;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 
@@ -436,8 +437,9 @@ h2 {
 
   color: #465564;
 
-  font-size: 13px;
-  line-height: 1.5;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 
@@ -470,7 +472,7 @@ h2 {
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 900px) {
+@media (max-width: 1090px) {
 
   .chart-row,
   .map-split {
@@ -667,6 +669,28 @@ h2 {
   padding-bottom: 27px;
 }
 
+.purchasing-copy-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
+  gap: 50px;
+  align-items: start;
+}
+
+.purchasing-copy-grid p {
+  max-width: none;
+}
+
+.purchasing-column p + p {
+  margin-top: 10px;
+}
+
+@media (max-width: 700px) {
+  .purchasing-copy-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 .income-charts {
   padding-top: 18px;
   padding-bottom: 45px;
@@ -790,8 +814,8 @@ h2 {
 
 .final-income-card .family-card-heading p {
   max-width: 75ch;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 #chart11 {
@@ -816,7 +840,7 @@ h2 {
 
 .final-story-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
   gap: 50px;
   align-items: start;
   margin-top: 36px;
@@ -835,7 +859,7 @@ h2 {
   max-width: 55ch;
   margin: 0 0 16px;
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.6;
   color: #465564;
 }
 
@@ -847,27 +871,28 @@ h2 {
 
 .conclusion-section {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 64px;
+  grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
+  gap: 50px;
   align-items: start;
 
   border-top: 1px solid #d8d0c3;
-  padding: 45px 0 55px;
+  padding: 45px 0 30px;
 }
 
 .conclusion-section h2 {
   margin: 0;
+  color: #17243a;
   font-family: Georgia, serif;
-  font-size: 46px;
-  line-height: 1.15;
+  font-size: 54px;
+  line-height: 1.06;
   font-weight: normal;
 }
 
 .conclusion-copy p {
   max-width: 56ch;
-  margin: 0 0 18px;
-  font-size: 18px;
-  line-height: 1.65;
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.6;
   color: #465564;
 }
 
@@ -879,24 +904,44 @@ h2 {
 
 .dashboard-footer {
   border-top: 1px solid #d8d0c3;
-  padding: 22px 0 45px;
+  padding: 22px 0 36px;
 }
 
 .dashboard-footer p {
-  max-width: 78ch;
-  margin: 0 0 9px;
-  font-size: 13px;
-  line-height: 1.6;
+  max-width: 90ch;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
   color: #465564;
+}
+
+.dashboard-footer .footer-created {
+  margin-bottom: 14px;
+}
+
+.dashboard-footer .footer-data-label {
+  margin-bottom: 7px;
+}
+
+.footer-reference + .footer-reference {
+  margin-top: 11px;
 }
 
 .dashboard-footer strong {
   color: #17243a;
+  font-size: 16px;
 }
 
 .dashboard-footer a {
+  display: block;
+  max-width: 90ch;
   color: #276f67;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
   text-underline-offset: 3px;
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Responsive ---------- */
@@ -926,7 +971,7 @@ h2 {
   }
 
   .conclusion-section h2 {
-    font-size: 36px;
+    font-size: 42px;
   }
 
   .conclusion-copy p {

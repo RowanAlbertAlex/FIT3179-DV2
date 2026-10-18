@@ -88,13 +88,17 @@
 
   "title": {
     "text": "How do states differ from the national income profile?",
-    "subtitle": "Blue means a smaller-than-national share; gold means a larger-than-national share in that income group.",
+    "subtitle": [
+      "Blue shows a smaller share than the national profile.",
+      "Gold shows a larger share within that income group."
+    ],
     "anchor": "start",
     "font": "Georgia",
     "fontSize": 24,
     "fontWeight": "normal",
     "subtitleFont": "Arial",
     "subtitleFontSize": 14,
+    "subtitleLineHeight": 20,
     "subtitleColor": "#465564",
     "offset": 18
   },
@@ -154,12 +158,12 @@
     "titleLimit": 500,
 
     "titleFont": "Arial",
-    "titleFontSize": 12,
+    "titleFontSize": 13,
     "titleFontWeight": "bold",
     "titleColor": "#465564",
 
     "labelFont": "Arial",
-    "labelFontSize": 11,
+    "labelFontSize": 13,
     "labelColor": "#465564",
 
     "values": [-8, -4, 0, 4, 8],

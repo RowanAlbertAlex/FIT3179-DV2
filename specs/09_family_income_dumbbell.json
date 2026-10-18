@@ -214,7 +214,7 @@
         "baseline": "bottom",
         "dy": -10,
         "font": "Arial",
-        "fontSize": 11,
+        "fontSize": 12,
         "fontWeight": "bold",
         "color": "#8f6a23"
       },
@@ -237,7 +237,7 @@
         "baseline": "middle",
         "dx": 10,
         "font": "Arial",
-        "fontSize": 11,
+        "fontSize": 12,
         "fontWeight": "bold",
         "color": "#195e56"
       },
@@ -248,6 +248,60 @@
         },
         "text": {
           "field": "label_2021",
+          "type": "nominal"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "window": [
+            {
+              "op": "rank",
+              "as": "rise_rank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "delta",
+              "order": "descending"
+            }
+          ]
+        },
+        {
+          "filter": "datum.rise_rank == 1"
+        },
+        {
+          "calculate": "(datum['2011'] + datum['2021']) / 2",
+          "as": "annotation_x"
+        },
+        {
+          "calculate": "'Largest rise: +' + format(datum.delta, '.1f') + ' pp'",
+          "as": "annotation_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -9,
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "fill": "#17243a"
+      },
+      "encoding": {
+        "x": {
+          "field": "annotation_x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 65],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "annotation_label",
           "type": "nominal"
         }
       }
@@ -263,7 +317,7 @@
       "labelFontSize": 12,
       "labelColor": "#465564",
       "titleFont": "Arial",
-      "titleFontSize": 12,
+      "titleFontSize": 13,
       "titleFontWeight": "normal",
       "titleColor": "#465564",
       "tickColor": "#c8d2cf",

@@ -36,6 +36,7 @@
     "fontWeight": "normal",
     "subtitleFont": "Arial",
     "subtitleFontSize": 14,
+    "subtitleLineHeight": 20,
     "subtitleColor": "#465564",
     "offset": 18
   },

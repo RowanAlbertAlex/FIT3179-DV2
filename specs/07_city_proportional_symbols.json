@@ -124,11 +124,11 @@
             "format": "~s",
 
             "titleFont": "Arial",
-            "titleFontSize": 11,
+            "titleFontSize": 13,
             "titleFontWeight": "bold",
 
             "labelFont": "Arial",
-            "labelFontSize": 10,
+            "labelFontSize": 12,
 
             "titleColor": "#465564",
             "labelColor": "#465564",
@@ -172,11 +172,11 @@
             "gradientThickness": 16,
 
             "titleFont": "Arial",
-            "titleFontSize": 11,
+            "titleFontSize": 13,
             "titleFontWeight": "bold",
 
             "labelFont": "Arial",
-            "labelFontSize": 10,
+            "labelFontSize": 12,
 
             "titleColor": "#465564",
             "labelColor": "#465564",
