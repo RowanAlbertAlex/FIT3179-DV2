@@ -1,0 +1,544 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Sankey showing Australian family types and their contribution to two weekly family income groups, ABS Census 2021.",
+  "background": null,
+
+  "width": 960,
+  "height": 452,
+
+  "padding": {
+    "left": 6,
+    "right": 6,
+    "top": 32,
+    "bottom": 12
+  },
+
+  "autosize": {
+    "type": "pad",
+    "contains": "padding"
+  },
+
+  "signals": [
+    {
+      "name": "nodeGap",
+      "value": 24
+    },
+    {
+      "name": "nodeLeft",
+      "value": 188
+    },
+    {
+      "name": "nodeRight",
+      "update": "width - 188"
+    },
+    {
+      "name": "nodeWidth",
+      "value": 13
+    },
+    {
+      "name": "midX",
+      "update": "(nodeLeft + nodeRight) / 2"
+    },
+    {
+      "name": "activeFamily",
+      "value": null,
+      "on": [
+        {
+          "events": "@flowRibbons:mouseover",
+          "update": "datum.family_short"
+        },
+        {
+          "events": "@familyBars:mouseover",
+          "update": "datum.family_short"
+        },
+        {
+          "events": "@flowRibbons:mouseout",
+          "update": "null"
+        },
+        {
+          "events": "@familyBars:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+
+  "data": [
+    {
+      "name": "incomeData",
+      "url": "data/08_family_income_distribution_2021.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "family_order": "number",
+          "income_order": "number",
+          "families": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.income_order == 4 ? '$3,000+' : 'Below $3,000'",
+          "as": "income_segment"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.income_order == 4 ? 1 : 2",
+          "as": "segment_order"
+        }
+      ]
+    },
+
+    {
+      "name": "familyNodes",
+      "source": "incomeData",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "family_short",
+            "family_order"
+          ],
+          "fields": ["families"],
+          "ops": ["sum"],
+          "as": ["count"]
+        },
+        {
+          "type": "stack",
+          "field": "count",
+          "sort": {
+            "field": "family_order",
+            "order": "ascending"
+          },
+          "as": ["y0", "y1"]
+        }
+      ]
+    },
+
+    {
+      "name": "incomeNodes",
+      "source": "incomeData",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "income_segment",
+            "segment_order"
+          ],
+          "fields": ["families"],
+          "ops": ["sum"],
+          "as": ["count"]
+        },
+        {
+          "type": "stack",
+          "field": "count",
+          "sort": {
+            "field": "segment_order",
+            "order": "ascending"
+          },
+          "as": ["y0", "y1"]
+        }
+      ]
+    },
+
+    {
+      "name": "ribbons",
+      "source": "incomeData",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "family_short",
+            "family_order",
+            "income_segment",
+            "segment_order"
+          ],
+          "fields": ["families"],
+          "ops": ["sum"],
+          "as": ["families"]
+        },
+
+        {
+          "type": "stack",
+          "field": "families",
+          "groupby": ["family_short"],
+          "sort": {
+            "field": "segment_order",
+            "order": "ascending"
+          },
+          "as": ["sourceOffset0", "sourceOffset1"]
+        },
+
+        {
+          "type": "stack",
+          "field": "families",
+          "groupby": ["income_segment"],
+          "sort": {
+            "field": "family_order",
+            "order": "ascending"
+          },
+          "as": ["targetOffset0", "targetOffset1"]
+        },
+
+        {
+          "type": "lookup",
+          "from": "familyNodes",
+          "key": "family_short",
+          "fields": ["family_short"],
+          "as": ["sourceNode"]
+        },
+
+        {
+          "type": "lookup",
+          "from": "incomeNodes",
+          "key": "income_segment",
+          "fields": ["income_segment"],
+          "as": ["targetNode"]
+        },
+
+        {
+          "type": "formula",
+          "expr": "scale('flowY', datum.sourceNode.y0 + datum.sourceOffset0) + (datum.family_order - 1) * nodeGap",
+          "as": "srcTop"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('flowY', datum.sourceNode.y0 + datum.sourceOffset1) + (datum.family_order - 1) * nodeGap",
+          "as": "srcBottom"
+        },
+
+        {
+          "type": "formula",
+          "expr": "scale('flowY', datum.targetNode.y0 + datum.targetOffset0) + (datum.segment_order - 1) * 3 * nodeGap",
+          "as": "dstTop"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('flowY', datum.targetNode.y0 + datum.targetOffset1) + (datum.segment_order - 1) * 3 * nodeGap",
+          "as": "dstBottom"
+        },
+
+        {
+          "type": "formula",
+          "expr": "'M' + nodeLeft + ',' + datum.srcTop + ' C' + midX + ',' + datum.srcTop + ' ' + midX + ',' + datum.dstTop + ' ' + nodeRight + ',' + datum.dstTop + ' L' + nodeRight + ',' + datum.dstBottom + ' C' + midX + ',' + datum.dstBottom + ' ' + midX + ',' + datum.srcBottom + ' ' + nodeLeft + ',' + datum.srcBottom + ' Z'",
+          "as": "ribbon"
+        },
+
+        {
+          "type": "formula",
+          "expr": "datum.family_short + ' → ' + datum.income_segment + ': ' + format(datum.families, ',') + ' families (' + format(datum.families / datum.sourceNode.count, '.1%') + ' of this family type; ' + format(datum.families / datum.targetNode.count, '.1%') + ' of this income group)'",
+          "as": "description"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "flowY",
+      "type": "linear",
+      "domain": [0, 6228833],
+      "range": [
+        0,
+        {
+          "signal": "height - 3 * nodeGap"
+        }
+      ],
+      "zero": true
+    },
+
+    {
+      "name": "familyColour",
+      "type": "ordinal",
+      "domain": [
+        "Couple + children",
+        "Couple, no children",
+        "One-parent",
+        "Other"
+      ],
+      "range": [
+        "#276f67",
+        "#79a69e",
+        "#c49a51",
+        "#6f8596"
+      ]
+    },
+
+    {
+      "name": "incomeColour",
+      "type": "ordinal",
+      "domain": [
+        "$3,000+",
+        "Below $3,000"
+      ],
+      "range": [
+        "#195e56",
+        "#a8cbc5"
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "name": "flowRibbons",
+      "type": "path",
+      "from": {
+        "data": "ribbons"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "field": "ribbon"
+          },
+          "stroke": {
+            "value": "#fffdf8"
+          },
+          "strokeWidth": {
+            "value": 0.6
+          },
+          "cursor": {
+            "value": "pointer"
+          }
+        },
+        "update": {
+          "fill": {
+            "scale": "familyColour",
+            "field": "family_short"
+          },
+          "fillOpacity": {
+            "signal": "activeFamily == null || activeFamily == datum.family_short ? 0.78 : 0.08"
+          },
+          "tooltip": {
+            "field": "description"
+          }
+        },
+        "hover": {
+          "fillOpacity": {
+            "value": 0.96
+          }
+        }
+      }
+    },
+
+    {
+      "name": "familyBars",
+      "type": "rect",
+      "from": {
+        "data": "familyNodes"
+      },
+      "encode": {
+        "enter": {
+          "cornerRadius": {
+            "value": 1
+          },
+          "cursor": {
+            "value": "pointer"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "nodeLeft - nodeWidth"
+          },
+          "x2": {
+            "signal": "nodeLeft"
+          },
+          "y": {
+            "signal": "scale('flowY', datum.y0) + (datum.family_order - 1) * nodeGap"
+          },
+          "y2": {
+            "signal": "scale('flowY', datum.y1) + (datum.family_order - 1) * nodeGap"
+          },
+          "fill": {
+            "scale": "familyColour",
+            "field": "family_short"
+          },
+          "fillOpacity": {
+            "signal": "activeFamily == null || activeFamily == datum.family_short ? 1 : 0.2"
+          },
+          "tooltip": {
+            "signal": "datum.family_short + ': ' + format(datum.count, ',') + ' families'"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "rect",
+      "from": {
+        "data": "incomeNodes"
+      },
+      "encode": {
+        "enter": {
+          "cornerRadius": {
+            "value": 1
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "nodeRight"
+          },
+          "x2": {
+            "signal": "nodeRight + nodeWidth"
+          },
+          "y": {
+            "signal": "scale('flowY', datum.y0) + (datum.segment_order - 1) * 3 * nodeGap"
+          },
+          "y2": {
+            "signal": "scale('flowY', datum.y1) + (datum.segment_order - 1) * 3 * nodeGap"
+          },
+          "fill": {
+            "scale": "incomeColour",
+            "field": "income_segment"
+          },
+          "tooltip": {
+            "signal": "datum.income_segment + ': ' + format(datum.count, ',') + ' families'"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "familyNodes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#17243a"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "nodeLeft - nodeWidth - 12"
+          },
+          "y": {
+            "signal": "scale('flowY', (datum.y0 + datum.y1) / 2) + (datum.family_order - 1) * nodeGap"
+          },
+          "text": {
+            "field": "family_short"
+          },
+          "fontWeight": {
+            "signal": "activeFamily == datum.family_short ? 'bold' : 'normal'"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "incomeNodes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#17243a"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "nodeRight + nodeWidth + 12"
+          },
+          "y": {
+            "signal": "scale('flowY', (datum.y0 + datum.y1) / 2) + (datum.segment_order - 1) * 3 * nodeGap"
+          },
+          "text": {
+            "field": "income_segment"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "nodeLeft - nodeWidth - 12"
+          },
+          "y": {
+            "value": -18
+          },
+          "align": {
+            "value": "right"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#465564"
+          },
+          "text": {
+            "value": "Family type"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "nodeRight + nodeWidth + 12"
+          },
+          "y": {
+            "value": -18
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#465564"
+          },
+          "text": {
+            "value": "Weekly family income"
+          }
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

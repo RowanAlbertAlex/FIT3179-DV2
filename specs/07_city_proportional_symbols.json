@@ -112,6 +112,8 @@
 
             "orient": "bottom",
             "direction": "horizontal",
+            "titleAnchor": "start",
+            "titlePadding": 6,
 
             "values": [
               50000,
@@ -135,7 +137,7 @@
             "symbolStrokeColor": "#fffdf8",
             "symbolOpacity": 0.9,
 
-            "offset": 8
+            "offset": 2
           }
         },
 
@@ -159,13 +161,15 @@
           "legend": {
             "title": "Share earning $3,000+",
 
-            "orient": "top",
+            "orient": "bottom",
             "direction": "horizontal",
+            "titleAnchor": "start",
+            "titlePadding": 6,
 
             "format": ".0%",
 
             "gradientLength": 155,
-            "gradientThickness": 10,
+            "gradientThickness": 16,
 
             "titleFont": "Arial",
             "titleFontSize": 11,
@@ -232,6 +236,16 @@
 
     "view": {
       "stroke": null
+    },
+
+    "legend": {
+      "layout": {
+        "bottom": {
+          "anchor": "start",
+          "direction": "horizontal",
+          "margin": 48
+        }
+      }
     }
 
   }

@@ -1,0 +1,591 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Butterfly chart comparing real weekly equivalised disposable household income across five income groups, 2021 and 2024. Source: AIHW/ANU PolicyMod.",
+  "background": null,
+  "width": 960,
+  "height": 385,
+  "padding": {
+    "left": 12,
+    "right": 12,
+    "top": 5,
+    "bottom": 15
+  },
+  "autosize": {
+    "type": "pad",
+    "contains": "padding"
+  },
+  "signals": [
+    {
+      "name": "leftZero",
+      "value": 373
+    },
+    {
+      "name": "rightZero",
+      "value": 587
+    },
+    {
+      "name": "middleX",
+      "value": 480
+    },
+    {
+      "name": "barHeight",
+      "value": 32
+    }
+  ],
+  "data": [
+    {
+      "name": "incomes",
+      "url": "data/15_aihw_real_equivalised_income_by_quintile_2021_2024.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "group_order": "number",
+          "real_income_2021_weekly": "number",
+          "real_income_2024_weekly": "number",
+          "change_dollars": "number",
+          "change_percent": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.group_order > 0 && isValid(datum.real_income_2021_weekly) && isValid(datum.real_income_2024_weekly)"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.group_order == 1 ? 'Lowest 20%' : datum.group_order == 2 ? 'Second 20%' : datum.group_order == 3 ? 'Middle 20%' : datum.group_order == 4 ? 'Fourth 20%' : 'Highest 20%'",
+          "as": "group_label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.real_income_2024_weekly - datum.real_income_2021_weekly",
+          "as": "income_difference"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.change_percent",
+          "as": "real_change"
+        }
+      ]
+    },
+    {
+      "name": "gridValues",
+      "values": [
+        {"amount": 1000},
+        {"amount": 2000}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "incomeLength",
+      "type": "linear",
+      "domain": [0, 2700],
+      "range": [0, 300],
+      "zero": true,
+      "nice": false
+    },
+    {
+      "name": "incomeRows",
+      "type": "band",
+      "domain": [1, 2, 3, 4, 5],
+      "range": [65, 355],
+      "paddingInner": 0.23,
+      "paddingOuter": 0.08
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 225
+          },
+          "y": {
+            "value": 23
+          },
+          "text": {
+            "value": "2021"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#a47a30"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "middleX"
+          },
+          "y": {
+            "value": 23
+          },
+          "text": {
+            "value": "Real change"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#465564"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 735
+          },
+          "y": {
+            "value": 23
+          },
+          "text": {
+            "value": "2024"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#195e56"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "gridValues"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "#d8d0c3"
+          },
+          "strokeOpacity": {
+            "value": 0.55
+          },
+          "strokeDash": {
+            "value": [3, 4]
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "leftZero - scale('incomeLength', datum.amount)"
+          },
+          "y": {
+            "value": 52
+          },
+          "y2": {
+            "value": 361
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "gridValues"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "#d8d0c3"
+          },
+          "strokeOpacity": {
+            "value": 0.55
+          },
+          "strokeDash": {
+            "value": [3, 4]
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "rightZero + scale('incomeLength', datum.amount)"
+          },
+          "y": {
+            "value": 52
+          },
+          "y2": {
+            "value": 361
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftZero"
+          },
+          "y": {
+            "value": 52
+          },
+          "y2": {
+            "value": 361
+          },
+          "stroke": {
+            "value": "#bbc9c5"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "rightZero"
+          },
+          "y": {
+            "value": 52
+          },
+          "y2": {
+            "value": 361
+          },
+          "stroke": {
+            "value": "#bbc9c5"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "bars2021",
+      "type": "rect",
+      "from": {
+        "data": "incomes"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#c99b3d"
+          },
+          "fillOpacity": {
+            "value": 0.81
+          },
+          "cornerRadius": {
+            "value": 1
+          },
+          "cursor": {
+            "value": "default"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "leftZero - scale('incomeLength', datum.real_income_2021_weekly)"
+          },
+          "x2": {
+            "signal": "leftZero"
+          },
+          "y": {
+            "signal": "scale('incomeRows', datum.group_order) + (bandwidth('incomeRows') - barHeight) / 2"
+          },
+          "height": {
+            "signal": "barHeight"
+          },
+          "tooltip": {
+            "signal": "{'Income group': datum.group_label, 'Year': '2021', 'Real weekly income': format(datum.real_income_2021_weekly, '$,.0f'), 'Change by 2024': format(datum.real_change, '+.1%')}"
+          }
+        }
+      }
+    },
+    {
+      "name": "bars2024",
+      "type": "rect",
+      "from": {
+        "data": "incomes"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#195e56"
+          },
+          "fillOpacity": {
+            "value": 0.94
+          },
+          "cornerRadius": {
+            "value": 1
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "rightZero"
+          },
+          "x2": {
+            "signal": "rightZero + scale('incomeLength', datum.real_income_2024_weekly)"
+          },
+          "y": {
+            "signal": "scale('incomeRows', datum.group_order) + (bandwidth('incomeRows') - barHeight) / 2"
+          },
+          "height": {
+            "signal": "barHeight"
+          },
+          "tooltip": {
+            "signal": "{'Income group': datum.group_label, 'Year': '2024', 'Real weekly income': format(datum.real_income_2024_weekly, '$,.0f'), 'Change since 2021': format(datum.real_change, '+.1%')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "incomes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#17243a"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "leftZero - 11"
+          },
+          "y": {
+            "signal": "scale('incomeRows', datum.group_order) + bandwidth('incomeRows') / 2"
+          },
+          "text": {
+            "signal": "format(datum.real_income_2021_weekly, '$,.0f')"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "incomes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#fffdf8"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "rightZero + 11"
+          },
+          "y": {
+            "signal": "scale('incomeRows', datum.group_order) + bandwidth('incomeRows') / 2"
+          },
+          "text": {
+            "signal": "format(datum.real_income_2024_weekly, '$,.0f')"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "incomes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#17243a"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "middleX"
+          },
+          "y": {
+            "signal": "scale('incomeRows', datum.group_order) + bandwidth('incomeRows') / 2 - 9"
+          },
+          "text": {
+            "field": "group_label"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "incomes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "middleX"
+          },
+          "y": {
+            "signal": "scale('incomeRows', datum.group_order) + bandwidth('incomeRows') / 2 + 10"
+          },
+          "text": {
+            "signal": "format(datum.real_change, '+.1%')"
+          },
+          "fill": {
+            "signal": "datum.real_change >= 0 ? '#276f67' : '#9b7028'"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 225
+          },
+          "y": {
+            "value": 376
+          },
+          "text": {
+            "value": "Real weekly household income ($)"
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#465564"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 735
+          },
+          "y": {
+            "value": 376
+          },
+          "text": {
+            "value": "Real weekly household income ($)"
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#465564"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

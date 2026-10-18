@@ -29,7 +29,7 @@
       ],
 
       "extent": [
-        750,
+        600,
         4200
       ],
 
@@ -145,7 +145,7 @@
 
       "encoding": {
         "x": {
-          "datum": 750,
+          "datum": 600,
           "type": "quantitative"
         },
 
@@ -179,7 +179,7 @@
         "fillOpacity": 0.82,
 
         "stroke": "#367a73",
-        "strokeWidth": 1.4
+        "strokeWidth": 1.1
       },
 
       "encoding": {
@@ -189,15 +189,18 @@
 
           "scale": {
             "domain": [
-              750,
+              600,
               4200
-            ]
+            ],
+            "zero": false,
+            "nice": false
           },
 
           "axis": {
             "title": "Median weekly household income of local SA2 ($)",
 
             "values": [
+              600,
               1000,
               1500,
               2000,
@@ -322,7 +325,7 @@
 
       "encoding": {
         "x": {
-          "datum": 750,
+          "datum": 600,
           "type": "quantitative"
         },
 

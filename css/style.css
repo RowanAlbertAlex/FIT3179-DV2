@@ -109,10 +109,22 @@ h2 {
   align-items: stretch;
 }
 
+.national-takeaway {
+  max-width: 78ch;
+  margin: 18px 0 -14px;
+  color: #465564;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.national-takeaway strong {
+  color: #17243a;
+}
+
 
 #chart1,
 #chart2,
-#chart3,
+.chart3-card,
 #chart4,
 #chart5 {
   min-width: 0;
@@ -123,12 +135,16 @@ h2 {
 }
 
 
-#chart3 {
+.chart3-card {
   width: 100%;
 
   margin-top: 34px;
 }
 
+#chart3 {
+  width: 100%;
+  min-width: 0;
+}
 
 #chart4,
 #chart5 {
@@ -138,7 +154,6 @@ h2 {
 
 #chart1 > div,
 #chart2 > div,
-#chart3 > div,
 #chart4 > div,
 #chart5 > div {
   height: 100%;
@@ -220,6 +235,10 @@ h2 {
 
   font-size: 16px;
   line-height: 1.6;
+}
+
+.map-transition .geography-transition-copy {
+  max-width: 58ch;
 }
 
 
@@ -411,14 +430,14 @@ h2 {
 
 
 .family-card-heading p {
-  max-width: 780px;
+  max-width: 65ch;
 
   margin: 5px 0 0;
 
   color: #465564;
 
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 
@@ -526,14 +545,14 @@ h2 {
 
   #chart1,
   #chart2,
-  #chart3,
+  .chart3-card,
   #chart4,
   #chart5 {
     padding: 14px;
   }
 
 
-  #chart3 {
+  .chart3-card {
     margin-top: 24px;
   }
 
@@ -593,3 +612,339 @@ h2 {
   }
 
 }
+
+/* ---------- Chart 9: Family income over time ---------- */
+
+.family-trend-card {
+  margin-top: 24px;
+}
+
+.family-chart-note {
+  max-width: 790px;
+  margin: 14px 0 0;
+
+  color: #465564;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.family-chart-note strong {
+  color: #17243a;
+}
+
+.family-transition {
+  margin: 28px 0 -4px;
+  padding-top: 18px;
+
+  border-top: 1px solid #d8d0c3;
+}
+
+.family-transition h3 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+.family-transition p {
+  max-width: 58ch;
+  margin: 9px 0 0;
+
+  color: #465564;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+
+/* ---------- Chapter 4: Real income ---------- */
+
+.purchasing-section {
+  padding-top: 38px;
+  padding-bottom: 27px;
+}
+
+.income-charts {
+  padding-top: 18px;
+  padding-bottom: 45px;
+}
+
+.income-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.income-card {
+  min-width: 0;
+}
+
+#chart10 {
+  width: 100%;
+  min-width: 0;
+}
+
+#chart10 .vega-embed,
+#chart10 .vega-embed > div,
+#chart10 canvas,
+#chart10 svg {
+  width: 100%;
+}
+
+.income-copy {
+  padding: 8px 5px 0 8px;
+}
+
+.income-copy h3 {
+  margin: 0 0 18px;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+.income-copy p {
+  margin: 0 0 16px;
+  max-width: 480px;
+  color: #465564;
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.income-copy strong {
+  color: #17243a;
+}
+
+@media (max-width: 900px) {
+  .income-split {
+    grid-template-columns: 1fr;
+  }
+
+  .income-copy {
+    max-width: 700px;
+    padding: 0;
+  }
+}
+
+/* ---------- Charts 9 and 10: Family section ---------- */
+
+.family-trend-card,
+.sankey-card {
+  margin-top: 24px;
+}
+
+#chart10 {
+  width: 100%;
+  min-width: 0;
+}
+
+#chart10 .vega-embed,
+#chart10 .vega-embed > div,
+#chart10 svg {
+  width: 100%;
+  max-width: 100%;
+}
+
+#chart10 svg {
+  height: auto;
+}
+
+.sankey-insight {
+  max-width: 62ch;
+  margin: 9px 0 0;
+
+  color: #465564;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.sankey-insight strong {
+  color: #17243a;
+}
+
+.purchasing-section {
+  margin-top: 10px;
+}
+
+/* ==========================================
+   Chart 11 — Real income and conclusion
+   ========================================== */
+
+.closing-charts {
+  padding-top: 18px;
+  padding-bottom: 45px;
+}
+
+.final-income-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.final-income-card .family-card-heading {
+  margin-bottom: 16px;
+}
+
+.final-income-card .family-card-heading p {
+  max-width: 75ch;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#chart11 {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#chart11 .vega-embed,
+#chart11 .vega-embed > div,
+#chart11 svg {
+  width: 100%;
+  max-width: 100%;
+}
+
+#chart11 svg {
+  display: block;
+  height: auto;
+}
+
+/* ---------- Explanation after Chart 11 ---------- */
+
+.final-story-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 50px;
+  align-items: start;
+  margin-top: 36px;
+}
+
+.final-story-lead h3 {
+  margin: 0 0 16px;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+.final-story-lead p,
+.final-story-detail p {
+  max-width: 55ch;
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #465564;
+}
+
+.final-story-row strong {
+  color: #17243a;
+}
+
+/* ---------- Final conclusion ---------- */
+
+.conclusion-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+  align-items: start;
+
+  border-top: 1px solid #d8d0c3;
+  padding: 45px 0 55px;
+}
+
+.conclusion-section h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 46px;
+  line-height: 1.15;
+  font-weight: normal;
+}
+
+.conclusion-copy p {
+  max-width: 56ch;
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: #465564;
+}
+
+.conclusion-section strong {
+  color: #17243a;
+}
+
+/* ---------- Footer / methodology ---------- */
+
+.dashboard-footer {
+  border-top: 1px solid #d8d0c3;
+  padding: 22px 0 45px;
+}
+
+.dashboard-footer p {
+  max-width: 78ch;
+  margin: 0 0 9px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #465564;
+}
+
+.dashboard-footer strong {
+  color: #17243a;
+}
+
+.dashboard-footer a {
+  color: #276f67;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+
+  .final-story-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .conclusion-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .closing-charts {
+    padding-top: 16px;
+  }
+
+  .final-story-lead h3 {
+    font-size: 26px;
+  }
+
+  .conclusion-section h2 {
+    font-size: 36px;
+  }
+
+  .conclusion-copy p {
+    font-size: 16px;
+  }
+
+}
+
+/* DV2 refinement test: remove chart card backgrounds */
+
+/* #chart1,
+#chart2,
+#chart3,
+#chart4,
+#chart5,
+.map-card,
+.family-card {
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+} */

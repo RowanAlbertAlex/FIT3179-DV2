@@ -1,0 +1,273 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Dumbbell chart comparing the share of families earning $3,000+ per week in 2011 and 2021.",
+  "background": null,
+
+  "data": {
+    "url": "data/14_australia_family_income_by_children_2011_2016_2021.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.year == 2011 || datum.year == 2021"
+    },
+    {
+      "filter": "datum.income_band_key == '3000_3999' || datum.income_band_key == '4000more'"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "families",
+          "as": "high_families"
+        },
+        {
+          "op": "max",
+          "field": "families_stated_total",
+          "as": "stated_families"
+        }
+      ],
+      "groupby": [
+        "year",
+        "family_group",
+        "children_count",
+        "children_label"
+      ]
+    },
+    {
+      "calculate": "datum.stated_families > 0 ? datum.high_families / datum.stated_families * 100 : null",
+      "as": "share"
+    },
+    {
+      "calculate": "(datum.family_group == 'couple' ? 'Couple, ' : 'One-parent, ') + datum.children_label",
+      "as": "family_type"
+    },
+    {
+      "pivot": "year",
+      "value": "share",
+      "groupby": [
+        "family_type",
+        "family_group",
+        "children_count",
+        "children_label"
+      ]
+    },
+    {
+      "calculate": "datum['2021'] - datum['2011']",
+      "as": "delta"
+    },
+    {
+      "calculate": "format(datum['2011'], '.0f') + '%'",
+      "as": "label_2011"
+    },
+    {
+      "calculate": "format(datum['2021'], '.0f') + '%'",
+      "as": "label_2021"
+    }
+  ],
+
+  "width": "container",
+  "height": {
+    "step": 40
+  },
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+
+  "encoding": {
+    "y": {
+      "field": "family_type",
+      "type": "nominal",
+      "sort": [
+        "Couple, 1 child",
+        "Couple, 2 children",
+        "Couple, 3 children",
+        "Couple, 4+ children",
+        "One-parent, 1 child",
+        "One-parent, 2 children",
+        "One-parent, 3 children",
+        "One-parent, 4+ children"
+      ],
+      "axis": {
+        "title": null,
+        "labelFont": "Arial",
+        "labelFontSize": 13,
+        "labelColor": "#17243a",
+        "labelPadding": 12,
+        "labelLimit": 190,
+        "ticks": false,
+        "domain": false
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 5,
+        "color": "#a8cbc5",
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "x": {
+          "field": "2011",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 65],
+            "nice": false
+          },
+          "axis": {
+            "title": "Share of families earning $3,000+ per week",
+            "format": ".0f",
+            "labelExpr": "datum.value + '%'",
+            "tickCount": 7,
+            "grid": true,
+            "gridColor": "#e6e1d7",
+            "gridOpacity": 1,
+            "gridWidth": 1,
+            "labelPadding": 8,
+            "titlePadding": 14
+          }
+        },
+        "x2": {
+          "field": "2021"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "shape": "circle",
+        "size": 220,
+        "color": "#c99b3d",
+        "stroke": "#fffdf8",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "2011",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 65],
+            "nice": false
+          }
+        },
+        "tooltip": [
+          {
+            "field": "family_type",
+            "type": "nominal",
+            "title": "Family type"
+          },
+          {
+            "field": "2011",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "2011 share earning $3,000+ (%)"
+          },
+          {
+            "field": "2021",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "2021 share earning $3,000+ (%)"
+          },
+          {
+            "field": "delta",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Change (percentage points)"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "shape": "circle",
+        "size": 220,
+        "color": "#195e56",
+        "stroke": "#fffdf8",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "2021",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 65],
+            "nice": false
+          }
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -10,
+        "font": "Arial",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#8f6a23"
+      },
+      "encoding": {
+        "x": {
+          "field": "2011",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label_2011",
+          "type": "nominal"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "font": "Arial",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#195e56"
+      },
+      "encoding": {
+        "x": {
+          "field": "2021",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label_2021",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "labelFontSize": 12,
+      "labelColor": "#465564",
+      "titleFont": "Arial",
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "titleColor": "#465564",
+      "tickColor": "#c8d2cf",
+      "domainColor": "#c8d2cf"
+    }
+  }
+}

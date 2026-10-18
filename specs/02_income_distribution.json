@@ -34,7 +34,7 @@
 
   "title": {
     "text": "The full national income distribution",
-    "subtitle": "All 17 Census bands; $4,000+ includes every income above that threshold",
+    "subtitle": "Gold bands: $3,000+ (24.3% combined); $4,000+ includes all higher incomes.",
     "anchor": "start",
     "font": "Georgia",
     "fontSize": 24,
@@ -108,7 +108,7 @@
 
         "color": {
           "condition": {
-            "test": "datum.band === '$4,000+'",
+            "test": "datum.order >= 15",
             "value": "#c99b3d"
           },
           "value": "#4c897f"
@@ -133,7 +133,7 @@
     {
       "transform": [
         {
-          "filter": "datum.band === '$4,000+'"
+          "filter": "datum.order >= 15"
         }
       ],
 
