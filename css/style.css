@@ -20,6 +20,9 @@ main {
   margin: 0 auto;
 }
 
+main strong {
+  color: #17243a;
+}
 
 
 /* ---------- Opening ---------- */
@@ -285,6 +288,10 @@ h2 {
 
   font-size: 16px;
   line-height: 1.62;
+}
+
+.map-copy strong {
+  color: #17243a;
 }
 
 
